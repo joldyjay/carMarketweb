@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0,minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>物料管理</title>
+
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/base.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/platform/iconfont.css"/>
+    <link rel="stylesheet" href="../../assets/css/weui_toast.min.css"/>
+    <link rel="stylesheet" href="../../assets/lib/daterangepicker/daterangepicker.css"/>
+
+    <link rel="stylesheet" href="../../assets/theme/default/theme.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/main.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/css.css">
+
+    <!--[if lt IE 9]>
+    <script src="../../assets/lib/html5shiv.js"></script>
+    <script src="../../assets/lib/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+        .form-group label {
+            width: 80px;
+            margin-right: 15px;
+            text-align: right;
+        }
+
+        .promot {
+            padding-left: 100px;
+        }
+
+        .form-control {
+            width: 200px !important;
+        }
+
+        .btn-select {
+            border-color: #e1e1e1;
+        }
+
+        .btn-select-color {
+            border-color: #e1e1e1;
+        }
+
+        .site {
+            list-style: none;
+            font-size: 14px;
+            color: #999;
+            padding-left: 0
+        }
+
+        .site li {
+            display: inline-block;
+        }
+
+        .site > li + li:before {
+            color: #999;
+            content: "\003E";
+            margin: 0 3px;
+        }
+
+        #upload-btn {
+            position: relative;
+            display: inline-block;
+            width: 70px;
+            height: 30px;
+            line-height: 30px;
+            border: 1px solid #e1e1e1;
+            text-align: center;
+            border-radius: 2px;
+            overflow: hidden;
+            text-decoration: none;
+        }
+
+        textarea {
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 2px;
+            color: #333;
+            resize: none;
+        }
+        input.form-control {
+            width: 300px!important;
+        }
+        textarea.form-control {
+            width: 300px!important;
+            height: 80px!important;
+            resize: none;
+        }
+        #preview{
+            margin-left: 98px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <ol class="site">
+        <li>营销案管理</li>
+        <li>添加新物料</li>
+    </ol>
+    <div class="module-header mb-20 mt-20">
+        <h3>添加新物料</h3>
+    </div>
+
+    <div class="tile mt-20">
+        <form action="" id="dataForm" method="post" class="form">
+            <h4>基本信息</h4>
+            <div class="form-group form-group-sm form-inline mt-30">
+                <label>物料名称：</label>
+                <input type="text" name="roleName" class="form-control"  placeholder="请输入物料名称" required>
+            </div>
+
+            <div class="form-group form-group-sm form-inline mt-30">
+                <label>备注：</label>
+                <textarea type="text" name="roleRemark" maxlength="100" class="form-control" placeholder="请输入备注内容"></textarea>
+                <div class="promot">备注信息不超过100个字符</div>
+            </div>
+            <h4>物料信息</h4>
+            <div class="form-group form-group-sm form-inline mt-30">
+                <label>物料类型：</label>
+                <div class="btn-group btn-group-sm">
+                    <input name="" class="searchItem" style="width: 0; height: 0;padding: 0; opacity: 0;">
+                    <button type="button" class="btn btn-default btn-select">请选择</button>
+                    <button type="button" class="btn btn-default dropdown-toggle btn-select-color"
+                            data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li data-value="0" data-limit=""><a href="#">请选择</a></li>
+                        <li data-value="1" data-limit="1080*220"><a href="#">条幅</a></li>
+                        <li data-value="2" data-limit="842*896"><a href="#">插屏</a></li>
+                        <li data-value="3" data-limit="1080*1920"><a href="#">开屏</a></li>
+                        <li data-value="4" data-limit="1080*494"><a href="#">轮播</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="form-group form-group-sm form-inline mt-30">
+                <label>上传图片：</label>
+                    <span class="file-box">
+                        <input type="file" name="" class="file-helper" accept="image/*" disabled="disabled">
+                        <a class="btn btn-sm btn-default cyan-text">选择图片</a>
+                    </span>
+                <font id="pixels"></font>
+                <span class='w-100'>
+                    <span id="preview" class="upload">
+                        <img width="100%" id="imghead" />
+                    </span>
+                </span>
+            </div>
+
+            <div class="form-group form-group-sm form-inline mt-30">
+                <label>目标URL：</label>
+                <input type="text" name="roleURL" class="form-control">
+            </div>
+
+            <div class="form-group form-group-sm form-inline mt-40 text-center">
+                <a class="btn btn-cyan btn-sm btn-width mr-20" id="btn-save">保存物料</a>
+                <a href="javascript:history.go(-1);" class="btn btn-cyan btn-sm btn-width">取 消</a>
+            </div>
+        </form>
+    </div>
+
+    <div id="messageBox"></div>
+</div>
+
+<!--[if lt IE 9]>
+<script src="../../assets/lib/es5-shim.min.js"></script>
+<script src="../../assets/lib/es5-sham.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 10]>
+<script>
+    Object.getPrototypeOf = function getPrototypeOf(object) {
+        return object.__proto__;
+    };
+</script>
+<![endif]-->
+
+<script>
+    if (window.ActiveXObject) {
+        var reg = /10\.0/;
+        var str = navigator.userAgent;
+        if (reg.test(str)) {
+            Object.getPrototypeOf = function getPrototypeOf(object) {
+                return object.__proto__;
+            };
+        }
+    }
+</script>
+
+
+<script src="../../assets/lib/require.js"></script>
+<script src="../../assets/dist/config.js"></script>
+<script src="../../assets/dist/imgUpload.js"></script>
+<script>
+    var messageBox;
+    require(["react", "react-dom", "MessageBox", "common", "bootstrap"], function (React, ReactDOM, MessageBox) {
+        messageBox = renderWidget(React, ReactDOM, MessageBox, {
+            grid: 0.35,
+            type: "confirm",
+            confirm: function () {
+                showToast();
+                //todo
+                var role_id = messageBox.getData();
+                deleteRole(role_id);
+
+                return true;
+            }
+        }, $("#messageBox")[0]);
+
+        listeners();
+
+        initFormValidate();
+
+        fileChangeListener();
+
+        $('.dropdown-menu li').on('click',function(){
+            var val_name_id = $(this).attr('data-value'),
+                    pix = $(this).attr('data-limit')||'0',
+                    pixW = pix.split('*')[0],
+                    pixH = pix.split('*')[1],
+                    coversArr = [[0,0],[540,110],[421,448],[270,480],[540,247]];
+            var cover = coversArr[val_name_id];
+            if(!pix){
+                $('#pixels').text('');
+                $('#preview').css({
+                    width:cover[0],
+                    height:cover[1]
+                });
+                $('.file-helper').attr('disabled',true);
+                return;
+            };
+             $('.file-helper').removeAttr('disabled',false);
+            $('#pixels').text('限制'+pix);
+            $('#preview').css({
+                width:cover[0],
+                height:cover[1]
+            });
+            $('#preview').attr('data-width',pixW);
+            $('#preview').attr('data-height',pixH);
+            //初始化
+            $('#imghead').attr('src','').removeAttr('width').removeAttr('height')
+        })
+    });
+
+
+    /**
+     * 监听
+     */
+    function listeners() {
+        $("#btn-save").on("click", function () {
+            if ($("#dataForm").validate().form()) {
+                $("#dataForm").submit();
+            }
+        });
+    }
+
+    function initFormValidate() {
+        $("#dataForm").validate({
+            errorPlacement: function (error, element) {
+                error.addClass("error-tip");
+                element.after(error);
+            },
+            rules: {
+                roleName: {
+                    required: true,
+                    noSpecial: true,
+                    remote: "check.html?roleId=${role.roleId}"
+                },
+                roleURL: {
+                    url: true
+                }
+            },
+            errorElement: "span",
+            messages: {
+                roleName: {
+                    required: "请填写物料名称"
+                },
+                roleURL: {
+                    url: "请填写合法的网址"
+                }
+            }
+        });
+    }
+
+</script>
+</body>
+</html>

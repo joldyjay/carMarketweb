@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>广告投放</title>
+    <link rel="stylesheet" href="../../assets/css/css.css">
+</head>
+<body style="background-color:#f5f7f7;">
+
+    <div id="rightCon">
+        <ol class="site">
+            <li>营销案管理</li>
+            <li>新建营销案</li>
+            <li>新建投放任务-广告投放</li>
+        </ol>
+        <h3>广告投放</h3>
+        <div id="content" class="clearfix">
+                <form id="newAdvertiseTaskForm">
+                <p>
+                    <label>任务名称：</label>
+                    <input type="text" class="w415 caseInfo  disable" disabled="disabled" id="task_name" placeholder="5万理财产品推荐用户" data-title="任务名称" maxlength="20">
+                </p>
+                <p class="mb-25">
+                    <label>投放方式：</label>
+                    <input type="text" class="w415 caseInfo  disable" disabled="disabled" id="task_name" placeholder="短/彩信" data-title="任务名称" maxlength="20">
+                </p>
+                <h4>完善投放信息</h4>
+                <p class="mt-25 clearfix">
+                    <label class="pull-left">选择触点：</label>
+                    <input type="text" class="w322 pull-left ml-5" readonly="readonly" id="advertiseName" placeholder="选择要投放广告的触点">
+                    <input type="hidden" id="channel_name_val_id" data-title="投放触点">
+                    <input type="hidden" id="channel_id">
+                    <input type="hidden" id="appplatform">
+                    <span class="pull-left btn-blue-noBg ml-10" data-dialog="addchannel" id="btn-addchannel">选择触点</span>
+                    <font class="pull-left font-blue ml-20" id="showDT" data-dialog="channelrange">查看排期</font>
+                </p>
+                <p class="mt-25">
+                    <label>发送时间：</label>
+                    <input type="text" name="" readonly="readonly" class="daterange w220" data-title="投放时间">
+                    <input type="hidden" id="start_time">   
+                    <input type="hidden" id="end_time">
+                </p>
+                <p class="mt-25 clearfix">
+                    <label class="pull-left">圈选用户：</label>
+                    <input type="hidden" id="people_id" value="{&quot;query&quot;:{&quot;bool&quot;:{&quot;minimum_should_match&quot;:&quot;0&quot;}}}">
+                    <input type="hidden" id="remark" value="">
+                    <span class="pull-left click current ml-10 chooseTag" id="allUser">所有用户</span>
+                    <span class="pull-left click ml-20 chooseTag" id="tagUser">标签用户</span>
+                </p>
+                <!--圈选用户-->
+                <div id="">
+                    
+
+<div class="userLabelBox mt-20" id="userLabelBox">
+    <div class="labelSelectedBox">
+        <table>
+            <tbody>
+                <tr>
+                    <th>
+                        <li class="labelType"><font>已选标签:</font></li>
+                    </th>
+                    <td id="labelInBox">
+                        <li class="labelNotice" style="display: inline-block;">最多选择5个系统默认标签或1个自定义标签</li>
+                    <!--<li class="labelShow">频率1<font class='closeLabel'>x</font></li>-->
+                    </td>
+                </tr>
+                <tr id="setCalculate">
+                    <th></th>
+                    <td>
+                        <div class="calculate">计算</div>
+                    </td>
+                </tr>
+                <tr id="selectUserNumber">
+                    <th>
+                        <li class="labelType"><font>圈定用户:</font></li>
+                    </th>
+                    <td><font class="userNumber">0</font></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="labelDefaultBox">
+        <table>
+
+            <tbody>
+                <tr class="terminaltype">
+                    <th><font class="notice">*</font>
+
+                        <li class="labelType"><font>终端类型:</font></li></th>
+                    <td>
+
+                        <li class="labelCheck defaultLabel" data-tagid="1" data-tagname="Android">Android</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="2" data-tagname="IOS">IOS</li>
+
+
+                    </td>
+                </tr>
+
+                <tr class="terminalbrand">
+                    <th>
+
+                        <li class="labelType"><font>终端品牌:</font></li>
+                    </th>
+                    <td>
+
+                        <li class="labelCheck defaultLabel" data-tagid="6" data-tagname="苹果" style="display: inline-block;">苹果</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="7" data-tagname="三星" style="display: inline-block;">三星</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="10" data-tagname="魅族" style="display: inline-block;">魅族</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="13" data-tagname="小米" style="display: inline-block;">小米</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="16" data-tagname="OPPO" style="display: inline-block;">OPPO</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="19" data-tagname="步步高" style="display: inline-block;">步步高</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="22" data-tagname="华为" style="display: inline-block;">华为</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="25" data-tagname="联想" style="display: inline-block;">联想</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="28" data-tagname="酷派" style="display: inline-block;">酷派</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="31" data-tagname="金立" style="display: inline-block;">金立</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="34" data-tagname="索尼爱立信" style="display: inline-block;">索尼爱立信</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="37" data-tagname="HTC" style="display: inline-block;">HTC</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="40" data-tagname="中兴" style="display: inline-block;">中兴</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="43" data-tagname="LG" style="display: inline-block;">LG</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="46" data-tagname="其他品牌" style="display: inline-block;">其他品牌</li>
+
+
+                        <!-- <li class="moreArea" data-name="终端品牌">更多</li> -->
+
+                    </td>
+                </tr>
+
+                <tr class="terminalos">
+                    <th>
+
+                        <li class="labelType"><font>终端操作系统:</font></li>
+                    </th>
+                    <td>
+
+                        <li class="labelCheck defaultLabel" data-tagid="51" data-tagname="IOS7及以下版本" style="display: inline-block;">IOS7-</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="54" data-tagname="IOS8版本" style="display: inline-block;">IOS8</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="57" data-tagname="IOS9版本" style="display: inline-block;">IOS9</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="58" data-tagname="Android 3及以下版本" style="display: inline-block;">A3-</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="61" data-tagname="Android 4.0至Android 4.3版本" style="display: inline-block;">A4&gt;A4.3</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="64" data-tagname="Android 4.4及以上版本" style="display: inline-block;">A4.4+</li>
+
+
+                        <!-- <li class="moreArea" data-name="终端操作系统" style="display: block;">更多</li> -->
+
+                    </td>
+                </tr>
+
+                <tr class="appver">
+                    <th>
+
+                        <li class="labelType"><font>应用版本:</font></li>
+                    </th>
+                    <td>
+
+                        <li class="labelCheck defaultLabel" data-tagid="80" data-tagname="低于最新版本">new-</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="81" data-tagname="最新版本">new</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="82" data-tagname="版本1.0以上">1.0+</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="83" data-tagname="版本2.0以上">2.0+</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="84" data-tagname="版本3.0以上">3.0+</li>
+
+
+                    </td>
+                </tr>
+
+                <tr class="channel">
+                    <th>
+
+                        <li class="labelType"><font>渠道:</font></li>
+                    </th>
+                    <td>
+
+                        <li class="labelCheck defaultLabel" data-tagid="90" data-tagname="腾讯应用宝">腾讯平台</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="91" data-tagname="百度手机助手">百度助手</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="92" data-tagname="360应用平台">360平台</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="93" data-tagname="移动MM商城">移动商城</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="94" data-tagname="豌豆荚">豌豆荚</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="95" data-tagname="安卓市场">安卓市场</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="96" data-tagname="小米商城">小米商城</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="97" data-tagname="机锋市场">机锋市场</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="98" data-tagname="华为应用市场">华为平台</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="99" data-tagname="91助手">91助手</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="100" data-tagname="uc应用商店">UC商店</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="101" data-tagname="应用汇">应用汇</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="102" data-tagname="魅族商店">魅族商店</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="103" data-tagname="oppo手机">oppo商店</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="104" data-tagname="联想乐商店">联想商城</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="105" data-tagname="安智市场">安智市场</li>
+
+
+                        <!-- <li class="moreArea" data-name="触点">更多</li> -->
+
+                    </td>
+                </tr>
+
+                <tr class="usefrequence">
+                    <th>
+
+                        <li class="labelType"><font>使用频率:</font></li>
+                    </th>
+                    <td>
+
+                        <li class="labelCheck defaultLabel" data-tagid="110" data-tagname="近30日启动1天">30:1D</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="111" data-tagname="近30日启动2-5天">30:2-5D</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="112" data-tagname="近30日启动5天以上">30:5D+</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="113" data-tagname="近30日启动2-15天">30:2-15D</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="114" data-tagname="近30日启动15天以上">30:15D+</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="115" data-tagname="近30日启动1次">30:1T</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="116" data-tagname="近30日启动2-20次">30:2-20T</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="117" data-tagname="近30日启动21-40次">30:21-41T</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="118" data-tagname="近30日启动41-100次">30:41-100T</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="119" data-tagname="近30日启动100次以上">30:100T+</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="120" data-tagname="近7日启动1次">7:1T</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="130" data-tagname="近7日启动2-7次">7:2-7T</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="131" data-tagname="近7日启动8-15次">7:8-15T</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="132" data-tagname="近7日启动16-35次">7:16-35T</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="133" data-tagname="近7日启动35次以上">7:35T+</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="134" data-tagname="近7日未启动">7:none</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="135" data-tagname="近30日未启动">30:none</li>
+
+
+                        <!-- <li class="moreArea" data-name="使用频率">更多</li> -->
+
+                    </td>
+                </tr>
+
+                <tr class="useduration">
+                    <th>
+
+                        <li class="labelType"><font>使用时长:</font></li>
+                    </th>
+                    <td>
+
+                        <li class="labelCheck defaultLabel" data-tagid="140" data-tagname="近30日内单次时长均值：0-1min">30:0-1M</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="141" data-tagname="近30日内单次时长均值: 1-5min">30:1-5M</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="142" data-tagname="近30日内单次时长均值: >5min">30:5M+</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="143" data-tagname="近30日内单次时长均值: 0-10min">30:0-10M</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="144" data-tagname="近30日内单次时长均值: 10-15min">30:10-15M</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="145" data-tagname="近30日内单次时长均值: >15min">30:15M+</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="146" data-tagname="近7日时长总量: 0-3min">7:0-3M</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="147" data-tagname="近7日时长总量: 3-60min">7:3-60M</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="148" data-tagname="近7日时长总量: 0-10min">7:0-10M</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="149" data-tagname="近7日时长总量: 10-60min">7:10-60M</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="150" data-tagname="近7日时长总量: >60min">7:60M+</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="151" data-tagname="近30日时长总量: 0-10min">30:0-10M</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="152" data-tagname="近30日时长总量: 10min-1h">30:10-60M</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="153" data-tagname="近30日时长总量: >1h">30:1H+</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="154" data-tagname="近30日时长总量: 0-1h">30:0-1H</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="155" data-tagname="近30日时长总量: 1h-4h">30:1-4H</li>
+
+                        <li class="labelCheck defaultLabel" data-tagid="156" data-tagname="近30日时长总量: >4h">30:4H+</li>
+
+
+                        <!-- <li class="moreArea" data-name="使用时长">更多</li> -->
+
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+                </div>
+                <!--圈选结束-->
+                <p class="mt-25 po-re">
+                    <label>上传物料：</label>
+                    <span id="simulate" class="w415">请选择已添加的物料</span>
+                    <input type="hidden" class="com_sel" data-title="上传物料">
+                    <span id="materialBox">
+                    </span>
+                    <span class="btn-blue-noBg ml-10">新建物料</span>
+                </p>
+                <p class="mt-25">
+                    <label></label>
+                    <a class="btn-green" id="saveTask" data-dialog="confirmDia">保存信息</a>
+                    <a class="btn-blue-noBg-100 ml-30" href="javascript:;">取  消</a>
+                </p>
+                </form>
+            </div>
+    </div>
+    <div class="dialog w520" id="addchannel" style="top: 53px; left: 414.5px; display: none;">
+            <h4 class="dialogTitle">
+                选择触点 <font id="dialogClose" class="cancel">X</font>
+            </h4>
+            <div class="content">
+                <table class="table mt-20">
+                    <thead>
+                        <tr>
+                            <td width="170">触点名称</td>
+                            <td width="70">触点类型</td>
+                            <td>所属应用</td>
+                            <td>创建时间</td>
+                        </tr>
+                    </thead>
+                </table>
+                <div class="table-body">
+                    <table class="table" id="select_channel_id">
+                        <!-- 选择触点位 -->
+                    <tbody><tr class="select_channel_class"><td width="160" class="text-left"><font class="click" data-dataid="0000000054a8ad4d0154a8bfd3850000" data-pix="1080*1920" data-platform="Android">杭研智投_Android_开屏</font></td><td width="60">开屏</td><td>杭研智投</td><td>2016-05-13 14:13:44</td></tr><tr class="select_channel_class"><td width="160" class="text-left"><font class="click" data-dataid="0000000054a8ad4d0154a8c01d370001" data-pix="1080*220" data-platform="Android">杭研智投_Android_banner</font></td><td width="60">条幅</td><td>杭研智投</td><td>2016-05-13 14:14:03</td></tr><tr class="select_channel_class"><td width="160" class="text-left"><font class="click" data-dataid="0000000054a8ad4d0154a8c094410002" data-pix="842*896" data-platform="Android">杭研智投_Android_插屏</font></td><td width="60">插屏</td><td>杭研智投</td><td>2016-05-13 14:14:33</td></tr><tr class="select_channel_class"><td width="160" class="text-left"><font class="click" data-dataid="0000000054a8ad4d0154a8c0bfbe0003" data-pix="1080*494" data-platform="Android">杭研智投_Android_轮播位</font></td><td width="60">轮播</td><td>杭研智投</td><td>2016-05-13 14:14:44</td></tr><tr class="select_channel_class"><td width="160" class="text-left"><font class="click" data-dataid="00000000559acbee0155ba17a656000a" data-pix="1080*220" data-platform="IOS">杭研智投_IOS_banner</font></td><td width="60">条幅</td><td>杭研智投</td><td>2016-07-05 16:06:00</td></tr><tr class="select_channel_class"><td width="160" class="text-left"><font class="click" data-dataid="00000000559acbee0155ba17da26000b" data-pix="842*896" data-platform="IOS">杭研智投_IOS_插屏</font></td><td width="60">插屏</td><td>杭研智投</td><td>2016-07-05 16:06:13</td></tr><tr class="select_channel_class"><td width="160" class="text-left"><font class="click" data-dataid="00000000559acbee0155ba18467c000c" data-pix="1080*1920" data-platform="IOS">杭研智投_IOS_开屏</font></td><td width="60">开屏</td><td>杭研智投</td><td>2016-07-05 16:06:41</td></tr><tr class="select_channel_class"><td width="160" class="text-left"><font class="click" data-dataid="00000000559acbee0155ba186ce5000d" data-pix="1080*494" data-platform="IOS">杭研智投_IOS_轮播位</font></td><td width="60">轮播</td><td>杭研智投</td><td>2016-07-05 16:06:50</td></tr></tbody></table>
+                </div>
+            </div>
+            <div class="dialogFoot clearfix mt-20">
+                <span class="pull-left"><a class="confirm pull-right">确定</a></span>
+                <span class="pull-left"><a class="cancel pull-left ml-10">取消</a></span>
+            </div>
+        </div>
+
+
+</body>
+</html>

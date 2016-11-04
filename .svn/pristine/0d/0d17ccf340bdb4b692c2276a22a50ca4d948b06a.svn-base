@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新建投放任务-消息推送</title>
+    <link rel="stylesheet" href="../../assets/css/joldy.css">
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/base.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/platform/iconfont.css"/>
+    <link rel="stylesheet" href="../../assets/css/weui_toast.min.css"/>
+    <link rel="stylesheet" href="../../assets/lib/daterangepicker/daterangepicker.css"/>
+
+    <link rel="stylesheet" href="../../assets/theme/default/theme.min.css"/>
+</head>
+<body style="background-color:#f5f7f7;">
+
+<div id="rightCon">
+    <ol class="site">
+        <li>营销案管理</li>
+        <li>新建营销案</li>
+        <li>新建投放任务-消息推送</li>
+    </ol>
+    <h3>消息推送</h3>
+    <div class="msgPushTop">
+        <form id="newAdvertiseTaskForm">
+            <p>
+                <label>任务名称：</label>
+                <input type="text" class="w415 caseInfo  disable" disabled="disabled" id="task_name" placeholder="5万理财产品推荐用户" data-title="任务名称" maxlength="20">
+            </p>
+            <p class="mb-25">
+                <label>投放方式：</label>
+                <input type="text" class="w415 caseInfo  disable" disabled="disabled" id="task_name" placeholder="消息推送" data-title="任务名称" maxlength="20">
+            </p>
+        </form>
+    </div>
+    <div class="msgPushArea">
+        <div class = 'l pull-left'>
+            <h4>推送文本消息预览</h4>
+            <div class="scroll pull-left">
+                <div class="scroll_left noImg" id="LeftArr"></div>
+                <div id="l" class="pull-left">
+                    <ul id="l_ul">
+                        <li><img alt="" src="../../assets/imgs/msgPushImg.png"></li>
+                        <li><img alt="" src="../../assets/imgs/msgPushImg1.png"></li>
+                        <li><img alt="" src="../../assets/imgs/msgPushImg2.png"></li>
+                        <li><img alt="" src="../../assets/imgs/msgPushImg3.png"></li>
+                    </ul>
+                </div>
+                <div class="scroll_right" id="RightArr"></div>
+            </div>
+        </div>
+
+        <div class="r pull-left">
+            <h4>完善推送信息</h4>
+            <!--圈选用户-->
+            <div id="">
+                <div class="pushRightBox" id="pushRightBox">
+                    <form action="" id="dataForm" method="post" class="form">
+                        <div class="form-group form-group-sm form-inline">
+                            <div class="f">
+                                <span>选择应用：</span>
+                                <input class="selMediaInput" type="text" placeholder="请选择要推送的媒体" />
+                                <a class="btn-blue-noBg-100 ml-30">选择应用</a>
+                            </div>
+                            <div class="s scrollBox">
+                                <ul class="radioWrap">
+                                    <li>
+                                        <label class="my-radio">
+                                            <input type="radio" name="app" value="0" checked="checked">
+                                            <i></i><span>文本</span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="my-radio">
+                                            <input type="radio" name="app" value="1">
+                                            <i></i><span>上传图片</span>
+                                        </label>
+
+                                    </li>
+                                </ul>
+                                <div class="commonInner">
+                                    <ul class="con">
+                                        <div class="arrow">
+                                            <em></em><span></span>
+                                        </div>
+                                        <li class="conLi">
+                                            <div class="title pull-left">
+                                                <ul>
+                                                    <li><span>内容：</span></li>
+                                                </ul>
+                                            </div>
+                                            <div class="inputWrap pull-left">
+                                                <ul class="inputArea">
+                                                    <li class="relative">
+                                                        <input class="selTxtInput" maxlength="100" type="text" placeholder="" />
+                                                        <span class="surplusWords absolute">剩余100个字</span>
+                                                    </li>
+                                                    <li class="tip">内容不能为空</li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="conLi conLi1 none">
+                                            <div class="title pull-left">
+                                                <ul>
+                                                    <li><span>图片：</span></li>
+                                                </ul>
+                                            </div>
+                                            <div class="inputWrap pull-left">
+                                                <ul class="inputArea">
+                                                    <li class="fileArea">
+                                                        <input type="text" name="fileName" class="form-control" placeholder="文件格式只支持bmp png jpeg jpg gif"" required>
+                                                        <input type="file" name="" class="UPload">
+                                                        <a class="btn btn-sm btn-default btn-blue-noBg">浏览</a>
+                                                    </li>
+                                                    <li class="tip">大小:不超过2M,格式:bmp / png / jpeg / jpg / gif,暂不支持iOS</li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!--平台与用户-->
+                            <div class="clearfix"></div>
+                            <div class="plfUser pull-left w100">
+                                <ul>
+                                    <li><span class="bold">平台与用户</span></li>
+                                    <li class="checkWrap">
+                                        <div class="checkInner">
+                                            <ul class="androdWrap">
+                                                <li>
+                                                    <label class="my-check">
+                                                        <input type="checkbox" value="" name="androd">
+                                                        <i></i>
+                                                    </label>
+                                                </li>
+                                                <li class="androd"></li>
+                                            </ul>
+                                            <ul class="appleWrap">
+                                                <li>
+                                                    <label class="my-check">
+                                                        <input type="checkbox" value="" name="apple">
+                                                        <i></i>
+                                                    </label>
+                                                </li>
+                                                <li class="apple"></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--标签用户-->
+                            <div class="clearfix"></div>
+                            <div class="labelUser scrollBox radioCom pull-left w100">
+                                <ul>
+                                    <li><span class="bold">选择标签用户</span></li>
+                                    <li class="labelUserWrap">
+                                        <div class="labelUserInner">
+                                            <ul class="allWrap">
+                                                <li>
+                                                    <label class="my-radio">
+                                                        <input class="allUsers" type="radio" value="" name="lUser">
+                                                        <i></i><span>所有用户</span>
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                            <ul class="labelWrap">
+                                                <li>
+                                                    <label class="my-radio">
+                                                        <input class="usersLabel" type="radio" value="" name="lUser">
+                                                        <i></i><span>标签用户</span>
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                            <ul class="tipWrap">
+                                                <li class="tipInner">
+                                                    <a>计算所圈选人数</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="labelScrollBox none">
+                                            <div class="commonInner">
+                                                <ul class="con">
+                                                    <div class="arrow2">
+                                                        <em></em><span></span>
+                                                    </div>
+                                                    <li class="labelCon">
+                                                        <div class="labelTitle pull-left">
+                                                            <ul>
+                                                                <li><span>已选标签</span></li>
+                                                                <li class="chooseExist"><a>选择已存标签</a></li>
+                                                            </ul>
+                                                            <ul class="labelAlreadySel">
+                                                                <li>
+                                                                    <span class="t">年龄:</span><span class="o">18-25岁</span>
+                                                                    <i class="delLabel"></i>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </li>
+
+                                                    <li class="labelNav">
+                                                        <ul class="tabs">
+                                                            <li id="tab1" class="sel tab1">车企-基础类标签</li>
+                                                            <li id="tab2" class="tab2">车企-业务类标签</li>
+                                                            <li id="tab3" class="tab3">用户App使用环境</li>
+                                                            <li id="tab4" class="tab4">用户行为标签</li>
+                                                        </ul>
+                                                        <!--the main tabs content area-->
+                                                        <div class="tabsCons tab1-con">
+                                                            <ul class="tabsTitle">
+                                                                <!--checkbox-->
+                                                                <li class="cb">
+                                                                    <input class="selAll" type="checkbox" name="selAll">
+                                                                </li>
+                                                                <!--label name-->
+                                                                <li class="ln">标签名称</li>
+                                                                <!--range filter-->
+                                                                <li class="rf">范围筛选</li>
+                                                            </ul>
+                                                            <div class="tabsOpt">
+                                                                <!--性别-->
+                                                                <ul class="tabsOptInner">
+                                                                    <li class="cb"><input type="checkbox" name="s性别ex"></li>
+                                                                    <li class="ln">性别</li>
+                                                                    <li class="rf">
+                                                                        <select name="sex">
+                                                                            <option value="0">不限</option>
+                                                                            <option value="1">男</option>
+                                                                            <option value="2">女</option>
+                                                                        </select>
+                                                                    </li>
+                                                                </ul>
+                                                                <!--年龄-->
+                                                                 <ul class="tabsOptInner">
+                                                                    <li class="cb"><input type="checkbox" name="s性别ex"></li>
+                                                                    <li class="ln">年龄</li>
+                                                                    <li class="rf">
+                                                                        <select name="age">
+                                                                            <option value="0">不限</option>
+                                                                            <option value="1">男</option>
+                                                                            <option value="2">女</option>
+                                                                        </select>
+                                                                    </li>
+                                                                </ul>
+                                                                <!--婚姻与否-->
+                                                                 <ul class="tabsOptInner">
+                                                                    <li class="cb"><input type="checkbox" name="s性别ex"></li>
+                                                                    <li class="ln">婚姻与否</li>
+                                                                    <li class="rf">
+                                                                        <select name="Marriage">
+                                                                            <option value="0">不限</option>
+                                                                            <option value="1">是</option>
+                                                                            <option value="2">否</option>
+                                                                        </select>
+                                                                    </li>
+                                                                </ul>
+                                                                 <!--生育与否-->
+                                                                 <ul class="tabsOptInner">
+                                                                    <li class="cb"><input type="checkbox" name="s性别ex"></li>
+                                                                    <li class="ln">生育与否</li>
+                                                                    <li class="rf">
+                                                                        <select name="birth">
+                                                                            <option value="0">不限</option>
+                                                                            <option value="1">是</option>
+                                                                            <option value="2">否</option>
+                                                                        </select>
+                                                                    </li>
+                                                                </ul>
+                                                                <!--年收入水平-->
+                                                                 <ul class="tabsOptInner">
+                                                                    <li class="cb"><input type="checkbox" name="s性别ex"></li>
+                                                                    <li class="ln">年收入水平</li>
+                                                                    <li class="rf">
+                                                                        <select name="income">
+                                                                            <option value="0">不限</option>
+                                                                            <option value="1">是</option>
+                                                                            <option value="2">否</option>
+                                                                        </select>
+                                                                    </li>
+                                                                </ul>
+                                                                <!--地区标签-->
+                                                                 <ul class="tabsOptInner">
+                                                                    <li class="cb"><input type="checkbox" name="s性别ex"></li>
+                                                                    <li class="ln">地区标签</li>
+                                                                    <li class="rf">
+                                                                        <select name="area">
+                                                                            <option value="0">不限</option>
+                                                                            <option value="1">是</option>
+                                                                            <option value="2">否</option>
+                                                                        </select>
+                                                                    </li>
+                                                                </ul>
+                                                                <!--兴趣爱好-->
+                                                                 <ul class="tabsOptInner">
+                                                                    <li class="cb"><input type="checkbox" name="s性别ex"></li>
+                                                                    <li class="ln">兴趣爱好</li>
+                                                                    <li class="rf">
+                                                                        <select name="hobby">
+                                                                            <option value="0">不限</option>
+                                                                            <option value="1">是</option>
+                                                                            <option value="2">否</option>
+                                                                        </select>
+                                                                    </li>
+                                                                </ul>
+                                                                <!--城市级别-->
+                                                                 <ul class="tabsOptInner">
+                                                                    <li class="cb"><input type="checkbox" name="s性别ex"></li>
+                                                                    <li class="ln">城市级别</li>
+                                                                    <li class="rf">
+                                                                        <select name="cityLevel">
+                                                                            <option value="0">不限</option>
+                                                                            <option value="1">是</option>
+                                                                            <option value="2">否</option>
+                                                                        </select>
+                                                                    </li>
+                                                                </ul>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="tabsCons tab2-con none">waiting...</div>
+                                                        <div class="tabsCons tab3-con none">waiting...</div>
+                                                        <div class="tabsCons tab4-con none">waiting...</div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--标签用户-->
+                            <div class="clearfix"></div>
+                            <div class="pushTime radioCom pull-left w100">
+                                <ul>
+                                    <li><span class="bold">推送时间</span></li>
+                                    <li class="pushTimeWrap">
+                                        <div class="pushTimeInner">
+                                            <ul class="hurryWrap">
+                                                <li>
+                                                    <label class="my-radio">
+                                                        <input type="radio" value="0" name="push">
+                                                        <i></i><span>立即推送</span>
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                            <ul class="laterWrap">
+                                                <li>
+                                                    <label class="my-radio">
+                                                        <input class='laterPushRadio' type="radio" value="1" name="push">
+                                                        <i></i><span>稍后推送</span>
+                                                    </label>
+                                                </li>
+                                                <li class="laterPushTimeInput none">
+                                                    <span id="activity-date-range" class="date-range-wrap valign-middle">
+                                                        <input class="form-control dataArea1" name="startTime" id="startDate" placeholder="请数输入时间">
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--用户点击通知后续动作-->
+                            <div class="clearfix"></div>
+                            <div class="userBehavior radioCom w100">
+                                <ul>
+                                    <li>
+                                        <span class="bold">用户点击通知后续动作</span>
+                                        <span class="inst">IOS平台目前只支持启动应用</span>
+                                    </li>
+                                    <li class="behaviorWrap">
+                                        <div class="behaviorInner">
+                                            <ul class="startWrap">
+                                                <li>
+                                                    <label class="my-radio">
+                                                        <input type="radio" value="" name="behavior">
+                                                        <i></i><span>启动应用</span>
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                            <ul class="webWrap">
+                                                <li>
+                                                    <label class="my-radio">
+                                                        <input type="radio" value="" name="behavior">
+                                                        <i></i><span>打开网页</span>
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                            <ul class="manulWrap">
+                                                <li>
+                                                    <label class="my-radio">
+                                                        <input type="radio" value="" name="behavior">
+                                                        <i></i><span>自定义通知</span>
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                            <ul class="pointWrap">
+                                                <li>
+                                                    <label class="my-radio">
+                                                        <input type="radio" value="" name="behavior">
+                                                        <i></i><span>指定应用</span>
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="scrollBox scrollBehavior">
+                                            <div class="commonInner">
+                                            <ul class="con con1 none">
+                                                <div class="arrow1">
+                                                    <em></em><span></span>
+                                                </div>
+                                                <li class="conLi conWeb">
+                                                    <div class="title pull-left">
+                                                        <ul>
+                                                            <li><span>URL:</span></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="inputWrap pull-left">
+                                                        <ul class="inputArea">
+                                                            <li class="relative">
+                                                                <input name="webCon" class="selTxtInput" maxlength="100" type="text" placeholder="" />
+                                                            </li>
+                                                            <li class="tip">请输入url</li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                                <li class="conLi conLi1 conLi_manul none">
+                                                    <div class="inputWrap pull-left">
+                                                        <ul class="inputArea">
+                                                            <li class="relative">
+                                                                <textarea name="manulCon" class="selTxtInput" cols="30" maxlength="500" type="textarea" name=""></textarea>
+                                                                <span class="surplusWords absolute">剩余500个字</span>
+                                                            </li>
+                                                            <li class="tip">
+                                                                <p>支持文本输入,点击通知之后SDK会将透传内容发给你的应用</p>
+                                                                请填写自定义通知
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--高级设置-->
+                            <div class="clearfix"></div>
+                            <div class="advance radioCom pull-left w100">
+                                <ul class="titleUl">
+                                    <li><span class="bold">高级设置</span><span class="more"></span></li>
+                                </ul>
+                                <ul class="advInner">
+                                    <li>
+                                        <span>离线时缓存消息</span>
+                                        <span class="inst"> 若设置为缓存时间2小时，则用户2小时内上线即可收到</span>
+                                    </li>
+                                    <li class="advCache">
+                                        <div class="advRadio">
+                                            <label class="my-radio">
+                                               <input type="radio" value="" name="cache">
+                                                <i></i><span class="rTitle">缓存时间</span>
+                                            </label>
+                                        </div>
+                                        <div class="selTime">
+                                            <span>
+                                                <select id="selT" name="selT">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                </select>
+                                            </span>
+                                            <span>小时</span>
+                                        </div>
+                                    </li>
+                                    <li class="advCache">
+                                        <div class="advRadio">
+                                            <label class="my-radio">
+                                               <input type="radio" value="" name="cache">
+                                                <i></i><span class="rTitle">消息有效时间</span>
+                                            </label>
+                                        </div>
+                                        <div class="selTime none">
+                                            <span id="activity-date-range" class="date-range-wrap valign-middle">
+                                                <input class="form-control dataArea2" name="startTime" id="startDate" readonly="readonly">
+                                            </span>
+                                        </div>
+                                    </li>
+                                    <li class="advCache">
+                                        <div class="advRadio">
+                                            <label class="my-radio">
+                                               <input type="radio" value="" name="cache">
+                                                <i></i><span class="rTitle">不缓存</span>
+                                            </label>
+                                        </div>
+                                        <div class="selTime rTitle none">
+                                            <span class="inst">
+                                                注：只发送至当前在线用户
+                                            </span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                         <div class="btnSub">
+                            <p class="mt-25">
+                                <label></label>
+                                <a class="btn-green" id="saveTask" data-dialog="confirmDia" href="">保存信息</a>
+                                <a class="btn-blue-noBg-100 ml-30" href="">取  消</a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--[if lt IE 9]>
+<script src="../../assets/lib/es5-shim.min.js"></script>
+<script src="../../assets/lib/es5-sham.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 10]>
+<script>
+    Object.getPrototypeOf = function getPrototypeOf(object) {
+        return object.__proto__;
+    };
+</script>
+<![endif]-->
+<script src="../../assets/lib/require.js"></script>
+<script src="../../assets/dist/config.js"></script>
+<script>require(['../../assets/js/msg_push'])</script>
+</body>
+</html>

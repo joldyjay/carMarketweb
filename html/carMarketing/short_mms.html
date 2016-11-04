@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>短/彩信</title>
+    <link rel="stylesheet" href="../../assets/css/css.css">
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/base.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/platform/iconfont.css"/>
+    <link rel="stylesheet" href="../../assets/css/weui_toast.min.css"/>
+    <link rel="stylesheet" href="../../assets/lib/daterangepicker/daterangepicker.css"/>
+
+    <link rel="stylesheet" href="../../assets/theme/default/theme.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/main.min.css"/>
+    <style>
+        #rightCon{
+            width:100%;
+        }
+        .form-inline .form-control{
+            width: 150px;
+        }
+
+        .nav>li>a{
+            padding: 10px 12px;
+            color: #26b273;
+        }
+
+        .nav>li>a:hover{
+            color:#b6dfc9;
+        }
+
+        .table>thead>tr>th{
+            background: #f4f4f4;
+            border-bottom-width: 1px;
+        }
+        .btn-select{
+            width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .close-btn{
+            cursor: pointer;
+        }
+        .dropdown-menu{
+            max-height: 200px;
+            overflow: auto;
+        }
+
+        #category_label_list{
+            border: 1px solid #ddd;
+            font-size: 12px;
+        }
+
+        #category_panels .table tbody td{
+            overflow: visible;
+        }
+        .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+            vertical-align: middle;
+        }
+        .strategy_item{
+            font-size: 12px;
+        }
+        .modal-label{
+            padding: 20px 30px;
+            border: 1px solid #e1e1e1;
+            margin-left: 102px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        label{vertical-align: bottom;}
+    </style>
+
+    <!--[if lt IE 9]>
+    <script src="../../assets/lib/html5shiv.js"></script>
+    <script src="../../assets/lib/respond.min.js"></script>
+    <![endif]-->
+
+
+</head>
+<body style="background-color:#f5f7f7;">
+
+    <div id="rightCon">
+        <ol class="site">
+            <li>营销案管理</li>
+            <li>新建营销案</li>
+            <li>新建投放任务-短/彩信</li>
+        </ol>
+        <h3>短/彩信</h3>
+        <div id="content" class="clearfix">
+                <p>
+                    <label>任务名称：</label>
+                    <input type="text" class="w415 caseInfo  disable" disabled="disabled" id="task_name" placeholder="5万理财产品推荐用户" data-title="任务名称" maxlength="20">
+                </p>
+                <p class="mb-25">
+                    <label>投放方式：</label>
+                    <input type="text" class="w415 caseInfo  disable" disabled="disabled" id="task_name" placeholder="短/彩信" data-title="任务名称" maxlength="20">
+                </p>
+                <h4>完善投放信息</h4>
+            <form action="" id="dataForm" method="post" class="form">
+
+                <div class="mt-25 form-group form-group-sm form-inline form" id="dataForm">
+                    <label>上传用户群：</label>
+                    <span class="file-box">
+                        <input type="text" name="fileName" class="w270 form-control" placeholder="支持csv,txt格式" required>
+                        <input type="file" name="" class="UPload">
+                        <a class="btn btn-sm btn-blue-noBg">上传</a>
+                    </span>
+
+                    <a class="font-ze" href="javascript:;">下载模板</a>
+                </div>
+                <div class="mt-20 form-group form-group-sm form-inline">
+                    <label><span class="star">*</span>发送时间：</label>
+                    <span id="activity-date-range" class="date-range-wrap valign-middle">
+                        <input class="form-control" name="startTime" id="startDate" readonly="readonly"> 至
+                        <input class="form-control" name="endTime" id="endDate" readonly="readonly">
+                    </span>
+                </div>
+                <p class="mt-25 mb-15 clearfix">
+                    <label class="pull-left"><span class="star">*</span>圈选用户：</label>
+                    <label class="my-radio"><input type="radio" name="a"><i></i><span>所有用户</span></label>
+                    <label class="my-radio"><input type="radio" name="a" id="label-user"><i></i><span>标签用户</span></label>
+                    <label class="font-ze ml-10">计算所圈选人数</label>
+                </p>
+                <div class="modal-label">
+                    <div class="">
+                        <label class="text-left">已选标签 </label>
+
+                        <div class="table-responsive" id="selected_area">
+                        </div>
+                    </div>
+
+                    <div class="mt-20">
+
+                        <ul class="nav nav-tabs mt-10" role="tablist" id="category_label_list">
+                        </ul>
+
+                        <div class="tab-content" id="category_panels">
+                        </div>
+                    </div>
+                </div>
+                <p class="mb-25 clearfix">
+                    <label class="pull-left"><span class="star">*</span>营销形式：</label>
+                    <label class="my-radio"><input type="radio" name="b"><i></i><span>短信</span></label>
+                    <label class="my-radio"><input type="radio" name="b"><i></i><span>彩信</span></label>
+                    </p>
+                <!--圈选用户-->
+                <div id="">
+
+
+<div class="userLabelBox mt-20" id="userLabelBox">
+    <div class="labelSelectedBox">
+        <table>
+            <tbody>
+                <tr>
+                    <th>
+                        <li class="labelType"><font>已选标签:</font></li>
+                    </th>
+                    <td id="labelInBox">
+                        <li class="labelNotice" style="display: inline-block;">最多选择5个系统默认标签或1个自定义标签</li>
+                    <!--<li class="labelShow">频率1<font class='closeLabel'>x</font></li>-->
+                    </td>
+                </tr>
+                <tr id="setCalculate">
+                    <th></th>
+                    <td>
+                        <div class="calculate">计算</div>
+                    </td>
+                </tr>
+                <tr id="selectUserNumber">
+                    <th>
+                        <li class="labelType"><font>圈定用户:</font></li>
+                    </th>
+                    <td><font class="userNumber">0</font></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+                </div>
+                <!--圈选结束-->
+                <div class="form-group form-group-sm form-inline">
+                    <label class="pull-left">营销内容：</label>
+                    <textarea maxlength="70" name="smsContent" class="form-control" placeholder="请输入短信内容，长度不超过70个字" required></textarea>
+                    <input type="hidden" class="com_sel" data-title="上传物料">
+                </div>
+                <p class="mt-25 form-group form-group-sm form-inline">
+                    <label></label>
+                    <a class="btn-green" id="btn-save" data-dialog="confirmDia" href="javascript:;">保存信息</a>
+                    <a class="btn-blue-noBg-100 ml-30  btn-muted btn-sm btn-width" href="javascript:history.go(-1);">取  消</a>
+                </p>
+                </form>
+            </div>
+    </div>
+
+    <div id="messageBox"></div>
+    <div id="closeConfirmBox"></div>
+
+<!--[if lt IE 9]>
+<script src="../../assets/lib/es5-shim.min.js"></script>
+<script src="../../assets/lib/es5-sham.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 10]>
+<script>
+    Object.getPrototypeOf = function getPrototypeOf(object) {
+        return object.__proto__;
+    };
+</script>
+<![endif]-->
+
+<script>
+    if (window.ActiveXObject) {
+        var reg = /10\.0/;
+        var str = navigator.userAgent;
+        if (reg.test(str)) {
+            Object.getPrototypeOf = function getPrototypeOf(object) {
+                return object.__proto__;
+            };
+        }
+    }
+</script>
+
+
+<script src="../../assets/lib/require.js"></script>
+<script src="../../assets/dist/config.js"></script>
+<script src="../../assets/lib/jquery-1.11.3.min.js"></script>
+<script>require(['../../assets/js/short_mms'])</script>
+<script>
+    setInterval(function(){
+        if($('#label-user').prop('checked')){
+            $('.modal-label')[0].style.display = 'block';
+        }else{
+            $('.modal-label')[0].style.display = 'none';
+        }
+    },500);
+</script>
+</body>
+</html>

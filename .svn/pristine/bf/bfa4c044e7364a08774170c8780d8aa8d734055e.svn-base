@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新建投放任务</title>
+    <link rel="stylesheet" href="../../assets/css/css.css">
+</head>
+<body style="background-color:#f5f7f7;">
+
+    <div id="rightCon">
+        <ol class="site">
+            <li>营销案管理</li>
+            <li>新建营销案</li>
+            <li>新建投放任务</li>
+        </ol>
+        <h3>新建投放任务</h3>
+        <div id="content" class="clearfix">
+            <div id="infoPlanCase">
+                    <p class="mt-15 ml-10">
+                        <label>任务名称：</label><input type="text" id="planCaseName" class="w425 caseInfo" data-title="标题" placeholder="请输入任务名称，长度不超过20个字">
+                    </p>
+            </div>
+            <div style="padding-top:40px;">
+            <label class="ml-10">投放方式：</label>
+                <table class="throw">
+                    <thead>
+                        <tr>
+                            <td><label class="my-radio"><input type="radio" name="a"><i></i></label></td>
+                            <td><img src="../../assets/imgs/car_picture2.png"/></td>
+                            <td>短/彩信<p>中国移动运营商特有的触达方式，用户覆盖广，触达比例高，营销场景广。</p><p>短信广告这一新型媒体一问世就被商界誉为“最强悍的第五广告媒体”</p></td>
+                        </tr>
+                        <tr>
+                            <td><label class="my-radio"><input type="radio" name="a"><i></i></label></td>
+                            <td><img src="../../assets/imgs/car_picture2.png"/></td>
+                            <td>广告投放<p>提供一站式端到端交叉营销解决方案通过大数据分析，精准定位、提高用户转化；助力汽车企业降本增效，提升营销效果。</p></td>
+                        </tr>
+                        <tr>
+                            <td><label class="my-radio"><input type="radio" name="a"><i></i></label></td>
+                            <td><img src="../../assets/imgs/car_picture2.png"/></td>
+                            <td>消息推送<p>面向移动应用的专业级精准推送，快读触达用户，实现移动互联网通知栏入口级精准广告推送。</p></td>
+                        </tr>
+                        <tr>
+                            <td><div class="btn-green pull-right"><a href="short_mms.html">下一步</a></div></td>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        </div>
+
+</body>
+</html>

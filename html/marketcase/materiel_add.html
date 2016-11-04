@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0,minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>物料管理</title>
+
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/base.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/platform/iconfont.css"/>
+    <link rel="stylesheet" href="../../assets/css/weui_toast.min.css"/>
+    <link rel="stylesheet" href="../../assets/lib/daterangepicker/daterangepicker.css"/>
+
+    <link rel="stylesheet" href="../../assets/theme/default/theme.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/main.min.css"/>
+
+    <!--[if lt IE 9]>
+    <script src="../../assets/lib/html5shiv.js"></script>
+    <script src="../../assets/lib/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+        .form-group label {
+            width: 80px;
+            margin-right: 15px;
+            text-align: right;
+        }
+
+        .promot {
+            padding-left: 100px;
+        }
+
+        .form-control {
+            width: 200px !important;
+        }
+
+        .btn-select {
+            border-color: #e1e1e1;
+        }
+
+        .btn-select-color {
+            border-color: #e1e1e1;
+        }
+
+        .site {
+            list-style: none;
+            font-size: 14px;
+            color: #999;
+            padding-left: 0
+        }
+
+        .site li {
+            display: inline-block;
+        }
+
+        .site > li + li:before {
+            color: #999;
+            content: "\003E";
+            margin: 0 3px;
+        }
+
+        #upload-btn {
+            position: relative;
+            display: inline-block;
+            width: 70px;
+            height: 30px;
+            line-height: 30px;
+            border: 1px solid #e1e1e1;
+            text-align: center;
+            border-radius: 2px;
+            overflow: hidden;
+            text-decoration: none;
+        }
+
+        textarea {
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 2px;
+            color: #333;
+            resize: none;
+        }
+        input.form-control {
+            width: 300px!important;
+        }
+        textarea.form-control {
+            width: 300px!important;
+            height: 80px!important;
+            resize: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <ol class="site">
+        <li>营销案管理</li>
+        <li>添加新物料</li>
+    </ol>
+    <div class="module-header mb-20">
+        <h3>添加新物料</h3>
+    </div>
+
+    <div class="tile mt-20">
+        <form action="" id="dataForm" method="post" class="form">
+            <h4>基本信息</h4>
+            <div class="form-group form-group-sm form-inline mt-30">
+                <label>物料名称：</label>
+                <input type="text" name="roleName" class="form-control"  placeholder="请输入物料名称" required>
+            </div>
+
+            <div class="form-group form-group-sm form-inline mt-30">
+                <label>备注：</label>
+                <textarea type="text" name="roleRemark" maxlength="100" class="form-control" placeholder="请输入备注内容"></textarea>
+                <div class="promot">备注信息不超过100个字符</div>
+            </div>
+            <h4>物料信息</h4>
+            <div class="form-group form-group-sm form-inline mt-30">
+                <label>物料类型：</label>
+                <div class="btn-group btn-group-sm">
+                    <input name="" class="searchItem" style="width: 0; height: 0;padding: 0; opacity: 0;">
+                    <button type="button" class="btn btn-default btn-select">条幅</button>
+                    <button type="button" class="btn btn-default dropdown-toggle btn-select-color"
+                            data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li data-value=""><a href="#">条幅</a></li>
+                        <li data-value=""><a href="#">插屏</a></li>
+                        <li data-value=""><a href="#">开屏</a></li>
+                        <li data-value=""><a href="#">轮播</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="form-group form-group-sm form-inline mt-30">
+                <label>上传图片：</label>
+                <div class="btn-group btn-group-sm">
+                    <span class="file-box">
+                        <a id="upload-btn">选择图片</a>
+                        <input type="file" class="file-helper" name="" id="uploadFile">
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group form-group-sm form-inline mt-30">
+                <label>目标URL：</label>
+                <input type="text" name="roleURL" class="form-control">
+            </div>
+
+            <div class="form-group form-group-sm form-inline mt-40 text-center">
+                <a class="btn btn-cyan btn-sm btn-width mr-20" id="btn-save">保存物料</a>
+                <a href="javascript:history.go(-1);" class="btn btn-cyan btn-sm btn-width">取 消</a>
+            </div>
+        </form>
+    </div>
+
+    <div id="messageBox"></div>
+</div>
+
+<!--[if lt IE 9]>
+<script src="../../assets/lib/es5-shim.min.js"></script>
+<script src="../../assets/lib/es5-sham.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 10]>
+<script>
+    Object.getPrototypeOf = function getPrototypeOf(object) {
+        return object.__proto__;
+    };
+</script>
+<![endif]-->
+
+<script>
+    if (window.ActiveXObject) {
+        var reg = /10\.0/;
+        var str = navigator.userAgent;
+        if (reg.test(str)) {
+            Object.getPrototypeOf = function getPrototypeOf(object) {
+                return object.__proto__;
+            };
+        }
+    }
+</script>
+
+
+<script src="../../assets/lib/require.js"></script>
+<script src="../../assets/dist/config.js"></script>
+<script>
+    var messageBox;
+    require(["react", "react-dom", "MessageBox", "common", "bootstrap"], function (React, ReactDOM, MessageBox) {
+        messageBox = renderWidget(React, ReactDOM, MessageBox, {
+            grid: 0.35,
+            type: "confirm",
+            confirm: function () {
+                showToast();
+                //todo
+                var role_id = messageBox.getData();
+                deleteRole(role_id);
+
+                return true;
+            }
+        }, $("#messageBox")[0]);
+
+        listeners();
+
+        initFormValidate();
+    });
+
+    /**
+     * 监听
+     */
+    function listeners() {
+        $("#btn-save").on("click", function () {
+            if ($("#dataForm").validate().form()) {
+                $("#dataForm").submit();
+            }
+        });
+    }
+
+    function initFormValidate() {
+        $("#dataForm").validate({
+            errorPlacement: function (error, element) {
+                error.addClass("error-tip");
+                element.after(error);
+            },
+            rules: {
+                roleName: {
+                    required: true,
+                    noSpecial: true,
+                    remote: "check.html?roleId=${role.roleId}"
+                }
+            },
+            errorElement: "span",
+            messages: {
+                roleName: {
+                    required: "请填写物料名称"
+                }
+            }
+        });
+    }
+
+</script>
+</body>
+</html>

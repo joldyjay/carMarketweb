@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新建营销案</title>
+    <link rel="stylesheet" href="../../assets/css/css.css">
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/base.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/platform/iconfont.css"/>
+    <link rel="stylesheet" href="../../assets/css/weui_toast.min.css"/>
+    <link rel="stylesheet" href="../../assets/lib/daterangepicker/daterangepicker.css"/>
+
+    <link rel="stylesheet" href="../../assets/theme/default/theme.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/main.min.css"/>
+    <style>
+    .table tbody tr td{padding:0px;vertical-align: middle;}
+    .dialog-title label{width:92%;}
+    </style>
+</head>
+<body style="background-color:#f5f7f7;">
+
+    <div id="rightCon">
+        <ol class="site">
+            <li>车企营销</li>
+            <li>新建营销案</li>
+        </ol>
+        <h3>新建营销案</h3>
+        <div id="content" class="clearfix">
+            <h4 class="dataTitle no-mp">营销案信息</h4>
+            <!--营销案信息-->
+            <form action="" id="dataForm" method="post" class="form">
+            <div id="infoPlanCase">
+                <p class="mt-15 ml-10 formfield">
+                    <label>标题：</label><input type="text" name="username" id="username" maxlength="20" class="ft_FC w425 username" placeholder="请输入营销标题，不超过20个字" data-verifymsg="标题不能为空!" data-needverify="required">
+                </p>
+                <p class="mt-15 ml-10 formfield">
+                    <label>备注：</label>
+                    <textarea id="remark" class="ft_FC caseCon w625 h60" name="remark" maxlength="100" placeholder="不能超过100个字" data-verifymsg="备注不能为空!" data-needverify="required" style="margin-left:-3px;"></textarea>
+                </p>
+                    <a id="logon" class="btn-green mt-10 ml-108 btn-add">确认添加</a>
+            </div>
+            </form>
+                <script>
+                var flag = false;
+                window.onbeforeunload = function(){
+                    if(!flag) return '您尚有未提交的内容，离开将丢失此内容'
+                };
+                </script>
+                
+                <!--表格区域-->
+                <div id="addMaterTab">
+                    <h4 class="dataTitle">
+                       添加投放 <span id="addNewAdver" class="pull-right"><a href="user_defined.html" class="btn-blue-noBg-100">新增投放</a></span>
+                    </h4>
+                    <table id="taskMater" class="table">
+                        <thead>
+                            <tr>
+                                <td>任务名称</td>
+                                <td>投放方式</td>
+                                <td>投放触点</td>
+                                <td>投放时间</td>
+                                <td>结束时间</td>
+                                <td>物料名称/投放内容</td>
+                                <td>创建时间</td>
+                                <td>当前状态</td>
+                                <td>投放标签</td>
+                                <td>操作</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>4Ggogo</td>
+                                <td>短信</td>
+                                <td>APP-浙江手厅轮播位</td>
+                                <td>2016/05/06 17:12:00</td>
+                                <td>2016/05/06 17:12:00</td>
+                                <td>短信内容短信内容短信内容短信内容短信内容</td>
+                                <td>2016/05/06 17:12:00</td>
+                                <td>添加完成</td>
+                                <td><a href="javascript:;">试乘试驾</a></td>
+                                <td class="FC_color"><a href="javascript:;" id="compile">编辑</a><a href="javascript:;" class="ml-25" id="btn-addchannel">删除</a></td>
+                            </tr>
+                            <tr>
+                                <td>Geienwnj</td>
+                                <td>广告投放</td>
+                                <td>APP-浙江手厅轮播位</td>
+                                <td>2016/05/06 17:12:00</td>
+                                <td>2016/05/06 17:12:00</td>
+                                <td>物料01</td>
+                                <td>2016/05/06 17:12:00</td>
+                                <td>添加完成</td>
+                                <td><a href="javascript:;">试乘试驾</a></td>
+                                <td class="FC_color"><a href="javascript:;">编辑</a><a href="javascript:;" class="ml-25">删除</a></td>
+                            </tr>
+                            <tr>
+                                <td>8237r97jfh</td>
+                                <td>消息推送</td>
+                                <td>APP-浙江手厅轮播位</td>
+                                <td>2016/05/06 17:12:00</td>
+                                <td>2016/05/06 17:12:00</td>
+                                <td>推送内容推送内容推送内容推送内容推送内容</td>
+                                <td>2016/05/06 17:12:00</td>
+                                <td>添加完成</td>
+                                <td><a href="javascript:;">试乘试驾</a></td>
+                                <td class="FC_color"><a href="javascript:;">编辑</a><a href="javascript:;" class="ml-25">删除</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-30">
+                    <a class="btn-green-80">提交审核</a>
+                    <a class="btn-blue-noBg-100 ml-15">保存营销案</a>
+                </div>
+            </div>
+    </div>
+    <div class="popBox" id="addchannel">
+        <div class="dialog-title"><label class="titleTag">提示</label><i class="closeMe">&times;</i></div>
+        <div class="dialogContent alert_pdi">是否确定删除该任务，删除后不可恢复！</div>
+    <div class="handlerBox"><button class="ui-okBtn">确定</button> <button class="ui-cancel closeMe">取消</button></div>
+    </div>
+    <div class="popBox" id="addredact">
+        <div class="dialog-title"><label class="titleTag">提示</label><i class="closeMe">&times;</i></div>
+        <div class="dialogContent alert_pdi add_alt"><p>提交后不可再添加投放任务！</p><p>是否确定提交审核营销案？</p></div>
+    <div class="handlerBox"><button class="ui-okBtn">确定</button> <button class="ui-cancel closeMe">取消</button></div>
+</div>
+
+<script src="../../assets/lib/require.js"></script>
+<script src="../../assets/dist/config.js"></script>
+<script src="../../assets/lib/jquery-1.11.3.min.js"></script>
+<script>require(['../../assets/js/new_marketing'])</script>   
+<script>
+    $(function(){
+            $(".login-btn").on("click", function(){
+                doLogin();
+            });
+    
+            polyFillPlaceHolder();
+        });
+    function polyFillPlaceHolder(){
+            var inputs = $("#dataForm input");
+            inputs.on("keydown.placeholder", function(){
+                $(this).next("label").hide();
+            });
+            inputs.on("blur.placeholder", function(){
+                if(this.value === "") {
+                    $(this).next("label").show();
+                }
+            });
+            $(".placeholder").on("click", function(){
+                $(this).prev("input").focus();
+            });
+        }
+</script>
+</body>
+</html>

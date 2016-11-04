@@ -1,0 +1,89 @@
+require(["react","react-dom","../js/listData","MessageBox","../js/common2","bootstrap","daterangepicker"], function(React, ReactDOM,ListData,MessageBox){
+    $.tsh.popupBox({
+        hand: '#btn-addchannel',
+        box: '#addchannel',
+        width: 620,
+        callback: function(box){
+            
+        },
+        okfn: function(hand,box){
+            
+            var checked = box.find(':radio:checked');
+            if( checked.length ){
+                $('#advertiseName').val( checked.closest('tr').find('td:eq(1)').text() );
+                box.Hide();
+            }else{
+                alert( '请选择!' );
+            }
+            
+        }
+    });
+    
+    var dateInit = function(){
+        var startEle = $('#startDate'), endEle = $('#endDate');
+        startEle.dateRangePicker({
+            separator: '至',
+            getValue: function () {
+                if (startEle.val() && endEle.val())
+                    return startEle.val() + '至' + endEle.val();
+                else
+                    return '';
+            },
+            setValue: function (s, s1, s2) {
+                startEle.val(s1);
+                endEle.val(s2);
+            }
+        });
+    }
+
+    dateInit();
+    
+    var messageBox;
+    messageBox = renderWidget(React, ReactDOM, MessageBox, {
+            grid: 0.35,
+            type: "confirm",
+            confirm: function () {
+                showToast();
+                //todo
+                var role_id = messageBox.getData();
+                deleteRole(role_id);
+
+                return true;
+            }
+        }, $("#messageBox")[0]);
+
+        listeners();
+
+        initFormValidate();
+    
+});
+
+function displayOtherConditions(show, text) {
+        if(show){
+            $(".condition-select").addClass("hidden");
+            $(".condition-select").eq(0).removeClass("hidden");
+        }else{
+            $(".condition-select").addClass("hidden");
+        }
+    }
+
+    function init(){
+        $(".filter-select li a").on("click", function(){
+            if($(this).text() != "请选择"){
+                displayOtherConditions(true);
+            }else{
+                displayOtherConditions(false);
+            }
+        });
+
+        $(".UPload").change(function(){
+            var filePath = $(this).val();
+            var index = filePath.lastIndexOf("\\");
+            var filename = filePath.substr(index+1);
+            $(this).prev("input").val(filename);
+
+            if(checkFileType($(this))){
+                preview(this);
+            }
+        });
+    }

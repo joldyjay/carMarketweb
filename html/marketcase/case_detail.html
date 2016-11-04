@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0,minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>个人信息</title>
+
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/base.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/platform/iconfont.css"/>
+    <link rel="stylesheet" href="../../assets/css/weui_toast.min.css"/>
+    <link rel="stylesheet" href="../../assets/lib/daterangepicker/daterangepicker.css"/>
+
+    <link rel="stylesheet" href="../../assets/theme/default/theme.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/main.min.css"/>
+
+    <!--[if lt IE 9]>
+    <script src="../../assets/lib/html5shiv.js"></script>
+    <script src="../../assets/lib/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+        .form-group label{
+            width: 80px;
+            margin-right: 15px;
+            text-align: right;
+        }
+        .tile-content{
+            background-color: #fff;
+            border: 1px solid #eef2f5;
+            border-radius: 3px;
+            padding: 20px 30px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <div class="module-header mb-20">
+        <h3>个人信息-个人信息查看</h3>
+    </div>
+
+    <div class="mt-20">
+        <a href="./info_edit.html" class="btn btn-sm btn-cyan"><i class="fa fa-plus mr-5"></i>个人信息修改</a>
+        <div class="tile-content mt-20">
+            <div class="form-group form-group-sm form-inline">
+                <label>登录账号：</label><span class="ml-10">admin</span>
+                </div>
+            <div class="form-group form-group-sm">
+                <label>手机号码：</label><span class="ml-10">18867102233</span>
+                </div>
+            <div class="form-group form-group-sm">
+                <label>电子邮箱：</label><span class="ml-10">1010214@qq.com</span>
+                </div>
+            <div class="form-group form-group-sm">
+                <label>用户身份：</label><span class="ml-10">系统管理员</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!--[if lt IE 9]>
+<script src="../../assets/lib/es5-shim.min.js"></script>
+<script src="../../assets/lib/es5-sham.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 10]>
+<script>
+    Object.getPrototypeOf = function getPrototypeOf(object) {
+        return object.__proto__;
+    };
+</script>
+<![endif]-->
+
+<script>
+    if (window.ActiveXObject) {
+        var reg = /10\.0/;
+        var str = navigator.userAgent;
+        if (reg.test(str)) {
+            Object.getPrototypeOf = function getPrototypeOf(object) {
+                return object.__proto__;
+            };
+        }
+    }
+</script>
+
+<script src="../../assets/lib/require.js"></script>
+<script src="../../assets/dist/config.js"></script>
+
+</body>
+</html>

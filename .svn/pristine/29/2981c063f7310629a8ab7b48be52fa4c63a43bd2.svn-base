@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0,minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>位置营销</title>
+
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/base.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/platform/iconfont.css"/>
+    <link rel="stylesheet" href="../../assets/css/weui_toast.min.css"/>
+    <link rel="stylesheet" href="../../assets/lib/daterangepicker/daterangepicker.css"/>
+
+    <link rel="stylesheet" href="../../assets/theme/default/theme.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/main.min.css"/>
+
+    <!--[if lt IE 9]>
+    <script src="../../assets/lib/html5shiv.js"></script>
+    <script src="../../assets/lib/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+        .outline {
+            width: 100%;
+            text-align: center;
+        }
+        .outline img {
+            width: 8%;
+            margin-top: 20%;
+        }
+        .outline span {
+            display: inline-block;
+            font-size: 25px;
+            height: 88px;
+            line-height: 95px;
+            vertical-align: bottom;
+            margin-left: 29px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <div class="module-header mb-20">
+        <h3></h3>
+    </div>
+
+    <div class="outline">
+        <img src="../../assets/imgs/wait.png">
+        <span>该功能未上线，敬请期待！</span>
+    </div>
+</div>
+
+<!--[if lt IE 9]>
+<script src="../../assets/lib/es5-shim.min.js"></script>
+<script src="../../assets/lib/es5-sham.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 10]>
+<script>
+    Object.getPrototypeOf = function getPrototypeOf(object) {
+        return object.__proto__;
+    };
+</script>
+<![endif]-->
+
+<script>
+    if (window.ActiveXObject) {
+        var reg = /10\.0/;
+        var str = navigator.userAgent;
+        if (reg.test(str)) {
+            Object.getPrototypeOf = function getPrototypeOf(object) {
+                return object.__proto__;
+            };
+        }
+    }
+</script>
+
+<script src="../../assets/lib/require.js"></script>
+<script src="../../assets/dist/config.js"></script>
+
+</body>
+</html>

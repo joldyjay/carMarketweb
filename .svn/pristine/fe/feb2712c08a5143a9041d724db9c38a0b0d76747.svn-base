@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新建营销案</title>
+    <link rel="stylesheet" href="../../assets/css/css.css">
+</head>
+<body style="background-color:#f5f7f7;">
+
+    <div id="rightCon">
+        <ol class="site">
+            <li>车企营销</li>
+            <li>新建营销案</li>
+        </ol>
+        <h3>新建营销案</h3>
+        <div id="content" class="clearfix">
+                <h4 class="dataTitle no-mp">
+                    营销案信息
+                    
+                </h4>
+                
+                <!--新增营销案-->
+                <div id="infoPlanCase">
+                    <p class="mt-15 ml-10">
+                        <label>标题：</label><input type="text" id="planCaseName" class="w425 caseInfo" data-title="标题" placeholder="请输入营销标题，不超过20个字">
+                    </p>
+                    <p class="mt-15 ml-10">
+                        <label>备注：</label>
+                        <textarea id="planCasePreface" class="caseCon w625 h40" data-title="备注信息" placeholder="不能超过100个字" style="margin-left:-3px;"></textarea>
+                    </p>
+                    <a id="addNewPlanCase" class="btn-blue mt-10 ml-95 btn-add">确认添加</a>
+                </div>
+                <script>
+                var flag = false;
+                window.onbeforeunload = function(){
+                    if(!flag) return '您尚有未提交的内容，离开将丢失此内容'
+                };
+                </script>
+                
+                
+                <!--表格区域-->
+                
+                <div id="addMaterTab">
+                    <h4 class="dataTitle">
+                        
+                                添加投放 <span id="addNewAdver" class="pull-right"><a href="user_defined.html" class="btn-blue-noBg-100">新增投放</a></span>
+                        
+                        
+                    </h4>
+                    <table id="taskMater" class="table">
+                        <thead>
+                            <tr>
+                                <td>任务名称</td>
+                                <td>投放方式</td>
+                                <td>投放触点</td>
+                                <td>投放时间</td>
+                                <td>结束时间</td>
+                                <td>物料名称/投放内容</td>
+                                <td>创建时间</td>
+                                <td>当前状态</td>
+                                <td>投放标签</td>
+                                <td>操作</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>4Ggogo</td>
+                                <td>短信</td>
+                                <td>APP-浙江手厅轮播位</td>
+                                <td>2016/05/06 17:12:00</td>
+                                <td>2016/05/06 17:12:00</td>
+                                <td>短信内容短信内容短信内容短信内容短信内容</td>
+                                <td>2016/05/06 17:12:00</td>
+                                <td>添加完成</td>
+                                <td>试乘试驾</td>
+                                <td><a href="javascript:;">编辑</a><a href="javascript:;" class="ml-25">删除</a></td>
+                            </tr>
+                            <tr>
+                                <td>Geienwnj</td>
+                                <td>广告投放</td>
+                                <td>APP-浙江手厅轮播位</td>
+                                <td>2016/05/06 17:12:00</td>
+                                <td>2016/05/06 17:12:00</td>
+                                <td>物料01</td>
+                                <td>2016/05/06 17:12:00</td>
+                                <td>添加完成</td>
+                                <td>试乘试驾</td>
+                                <td><a href="javascript:;">编辑</a><a href="javascript:;" class="ml-25">删除</a></td>
+                            </tr>
+                            <tr>
+                                <td>8237r97jfh</td>
+                                <td>消息推送</td>
+                                <td>APP-浙江手厅轮播位</td>
+                                <td>2016/05/06 17:12:00</td>
+                                <td>2016/05/06 17:12:00</td>
+                                <td>推送内容推送内容推送内容推送内容推送内容</td>
+                                <td>2016/05/06 17:12:00</td>
+                                <td>添加完成</td>
+                                <td>试乘试驾</td>
+                                <td><a href="javascript:;">编辑</a><a href="javascript:;" class="ml-25">删除</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-30">
+                        <a class="btn-green-80">提交审核</a>
+                        <a class="btn-blue-noBg-100 ml-15">保存营销案</a>
+                    </div>
+                
+            </div>
+    </div>
+</body>
+</html>

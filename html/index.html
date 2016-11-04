@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0,minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>重庆移动行业营销平台</title>
+
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../assets/css/base.min.css"/>
+    <link rel="stylesheet" href="../assets/css/platform/iconfont.css"/>
+
+    <link rel="stylesheet" href="../assets/theme/default/theme.min.css"/>
+    <link rel="stylesheet" href="../assets/css/main.min.css"/>
+
+    <!--[if lt IE 9]>
+    <script src="../assets/lib/html5shiv.js"></script>
+    <script src="../assets/lib/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+<div class="headerBox">
+    <div class="inner-header">
+        <ul id="menu">
+            <li><a href="">营销平台首页</a></li>
+            <li class="bg-arrow"><a href="">产品中心</a>
+                <ul>
+                    <li><a href="">智投</a></li>
+                    <li><a href="">智推</a></li>
+                    <li><a href="">智铃</a></li>
+                </ul>
+            </li>
+            <li class="bg-arrow"><a href="">解决方案</a>
+                <ul>
+                    <li><a href="">金融行业</a></li>
+                    <li><a href="">汽车行业</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="logo pull-left">
+            <a href="index.html" class="mr-10">
+                <img id="logo-img" src="../assets/imgs/logo.png" alt="logo">
+            </a>
+            <span class="log-b-txt">营销平台</span><span class="small-txt">汽车行业解决方案</span>
+        </div>
+        <div class="navBar pull-right">
+            <span><i class="iconfont icon-user mr-10"></i>
+                <span id="username">18867105555</span>
+                <span class="icon-triangle-bottom">
+                    <ul>
+                        <li><a href="">查看资料</a></li>
+                        <li><a href="">切换账户</a></li>
+                    </ul>
+                </span>
+            </span>
+            <a class="ml-20 white-text">退出</a>
+        </div>
+    </div>
+</div>
+
+<div class="desktop">
+    <div class="left-menu" id="sidebar"></div>
+    <div class="main">
+        <iframe id="desktop_frame" src="" style="width: 100%; height: 100%;" frameborder="no" scrolling="no"></iframe>
+    </div>
+</div>
+<div class="footerBox">
+    <span>产品下载</span><span>帮助中心</span><span>京ICP备xxxxx号&nbsp;©&nbsp;中国移动通信版权所有</span>
+    <img src="../assets/imgs/wchart.png"/><img src="../assets/imgs/sina.png"/>
+</div>
+
+<!--[if lt IE 9]>
+<script src="../assets/lib/es5-shim.min.js"></script>
+<script src="../assets/lib/es5-sham.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 10]>
+<script>
+    Object.getPrototypeOf = function getPrototypeOf(object) {
+        return object.__proto__;
+    };
+</script>
+<![endif]-->
+
+<script>
+    if (window.ActiveXObject) {
+        var reg = /10\.0/;
+        var str = navigator.userAgent;
+        if (reg.test(str)) {
+            Object.getPrototypeOf = function getPrototypeOf(object) {
+                return object.__proto__;
+            };
+        }
+    }
+</script>
+
+
+<script src="../assets/lib/require.js"></script>
+<script src="../assets/dist/config.js"></script>
+<script>
+    var MENU = [
+        {
+            id: "1", customIcon: "fa iconfont icon-user", text: "营销案管理", children: [
+            {id: "11", text: "自定义营销案", link: "./carMarketing/Custom_marketing.html"},
+            {id: "12", text: "新建营销案", link: "./carMarketing/new_marketing.html"},
+            {id: "13", text: "物料管理", link: "./carMarketing/materiel_manage.html"}
+        ]
+        },
+        {id: "2", customIcon: "fa iconfont icon-liuliang", text: "监控分析", link: "./monitor/monitor_list.html"},
+        {id: "3", customIcon: "fa fa-area-chart", text: "营销报告", link: "./report/report_list.html"},
+        {id: "4", customIcon: "fa fa-pie-chart", text: "竞品分析", link: "./competitor/competitor_list.html"}
+    ];
+</script>
+<script src="../assets/js/pages/index.js"></script>
+</body>
+</html>

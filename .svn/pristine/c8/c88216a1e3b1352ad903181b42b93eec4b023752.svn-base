@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>广告投放</title>
+    <link rel="stylesheet" href="../../assets/css/css.css">
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/base.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/platform/iconfont.css"/>
+    <link rel="stylesheet" href="../../assets/css/weui_toast.min.css"/>
+    <link rel="stylesheet" href="../../assets/lib/daterangepicker/daterangepicker.css"/>
+
+    <link rel="stylesheet" href="../../assets/theme/default/theme.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/main.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/viewPeriod.css"/>
+    <style>
+    #rightCon{
+        width:100%;
+    }
+
+    .table>tbody>tr>td{
+        border:0px;vertical-align:middle;
+    }
+
+    .dropdown-menu{
+        min-width: 295px;
+    }
+
+    .form-inline .form-control{
+        width: 150px;
+    }
+
+    .nav>li>a{
+        padding: 10px 12px;
+        color: #26b273;
+    }
+
+    .nav>li>a:hover{
+        color:#b6dfc9;
+    }
+
+    .table>thead>tr>th{
+        background: #f4f4f4;
+        border-bottom-width: 1px;
+    }
+    .btn-select{
+        width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .close-btn{
+        cursor: pointer;
+    }
+    .dropdown-menu{
+        max-height: 200px;
+        overflow: auto;
+    }
+
+    #category_label_list{
+        border: 1px solid #ddd;
+        font-size: 12px;
+    }
+
+    #category_panels .table tbody td{
+        overflow: visible;
+    }
+    .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+        vertical-align: middle;
+    }
+    .strategy_item{
+        font-size: 12px;
+    }
+    .modal-label{
+        padding: 20px 30px;
+        border: 1px solid #e1e1e1;
+        margin-left: 102px;
+        margin-bottom: 20px;
+        display: none;
+    }
+
+    </style>
+</head>
+<body style="background-color:#f5f7f7;">
+    <div id="rightCon">
+        <ol class="site">
+            <li>营销案管理</li>
+            <li>新建营销案</li>
+            <li>新建投放任务-广告投放</li>
+        </ol>
+        <h3>广告投放</h3>
+        <div id="content" class="clearfix">
+            <form id="newAdvertiseTaskForm">
+            <p>
+                <label>任务名称：</label>
+                <input type="text" class="w415 caseInfo  disable" disabled="disabled" id="task_name" placeholder="5万理财产品推荐用户" data-title="任务名称" maxlength="20">
+            </p>
+            <p class="mb-25">
+                <label>投放方式：</label>
+                <input type="text" class="w415 caseInfo  disable" disabled="disabled" id="task_name" placeholder="广告投放" data-title="任务名称" maxlength="20">
+            </p>
+            <h4>完善投放信息</h4>
+            <p class="mt-25 clearfix">
+                <label class="pull-left"><span class="star">*</span>选择触点：</label>
+                <input type="text" class="ft_FC w322 pull-left ml-5" readonly="readonly" id="advertiseName" placeholder="选择要投放广告的触点">
+                <input type="hidden" id="channel_name_val_id" data-title="投放触点">
+                <input type="hidden" id="channel_id">
+                <input type="hidden" id="appplatform">
+                <span class="pull-left btn-blue-noBg ml-10" data-dialog="addchannel" id="btn-addchannel">选择触点</span>
+                <span class="font-ze ml-10" data-toggle="modal" data-target="#myModal">查看排期</span>
+
+            </p>
+            <div class="mt-25 form-group form-group-sm form-inline">
+                <label><span class="star">*</span>发送时间：</label>
+                <span id="activity-date-range" class="date-range-wrap valign-middle">
+                    <input class="form-control" name="startTime" id="startDate" readonly="readonly"> 至
+                    <input class="form-control" name="endTime" id="endDate" readonly="readonly">
+                </span>
+            </div>
+            <p class="mt-25 clearfix">
+                <label class="pull-left"><span class="star">*</span>圈选用户：</label>
+                <label class="my-radio"><input type="radio" name="a"><i></i><span>所有用户</span></label>
+                <label class="my-radio"><input type="radio" name="a" id="label-user1"><i></i><span>标签用户</span></label>
+                <label class="font-ze ml-10">计算所圈选人数</label>
+            </p>
+            <!--标签用户-->
+            <div class="modal-label">
+                <div class="">
+                    <label class="text-left">已选标签 </label>
+
+                    <div class="table-responsive" id="selected_area">
+                    </div>
+                </div>
+
+                <div class="mt-20">
+
+                    <ul class="nav nav-tabs mt-10" role="tablist" id="category_label_list">
+                    </ul>
+
+                    <div class="tab-content" id="category_panels">
+                    </div>
+                </div>
+            </div>
+            <!--圈选用户-->
+            <div id="">
+                <div class="userLabelBox mt-20" id="userLabelBox">
+                    <div class="labelSelectedBox">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>
+                                        <li class="labelType"><font>已选标签:</font></li>
+                                    </th>
+                                    <td id="labelInBox">
+                                        <li class="labelNotice" style="display: inline-block;">最多选择5个系统默认标签或1个自定义标签</li>
+                                    <!--<li class="labelShow">频率1<font class='closeLabel'>x</font></li>-->
+                                    </td>
+                                </tr>
+                                <tr id="setCalculate">
+                                    <th></th>
+                                    <td>
+                                        <div class="calculate">计算</div>
+                                    </td>
+                                </tr>
+                                <tr id="selectUserNumber">
+                                    <th>
+                                        <li class="labelType"><font>圈定用户:</font></li>
+                                    </th>
+                                    <td><font class="userNumber">0</font></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                </div>
+                <!--圈选结束-->
+                <p class="mt-25 po-re">
+                <div class="form-group form-group-sm form-inline mt-30">
+                <label><span class="star">*</span>上传物料：</label>
+                <div class="btn-group btn-group-sm">
+                    <input name="" class="searchItem" style="width: 0; height: 0;padding: 0; opacity: 0;">
+                    <button type="button" class="btn btn-default btn-select w270 ft_FC">请选择已添加物料</button>
+                    <button type="button" class="btn btn-default dropdown-toggle btn-select-color" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li data-value="0" data-limit="1080*220"><a href="javascript:;">11111</a></li>
+                        <li data-value="1" data-limit="842*896"><a href="javascript:;">22222</a></li>
+                        <li data-value="2" data-limit="1080*1920"><a href="javascript:;">33333</a></li>
+                        <li data-value="3" data-limit="1080*494"><a href="javascript:;">44444</a></li>
+                    </ul>
+                    <span class="btn-blue-noBg ml-10"><a href="materiel_add.html" class="CR_green">新建物料</a></span>
+                </div>
+            </div>
+            </p>
+                <p class="mt-25">
+                    <label></label>
+                    <a class="btn-green" id="saveTask" data-dialog="confirmDia">保存信息</a>
+                    <a class="btn-blue-noBg-100 ml-30" href="javascript:;">取  消</a>
+                </p>
+                </form>
+            </div>
+    </div>
+<div class="popBox" id="addchannel">
+    <div class="dialog-title"><label class="titleTag">选择触点</label><i class="closeMe">&times;</i></div>
+    <div class="dialogContent">
+        <table class="table mt-20">
+            <thead>
+                <tr>
+                    <td width="220">触点名称</td>
+                    <td width="70">触点类型</td>
+                    <td>所属应用</td>
+                    <td>创建时间</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td align="left"><label class="my-radio"><input type="radio" name="a"><i></i><span>APP-悟空分析-轮播位</span></label></td>
+                    <td>轮播位(banner位)</td>
+                    <td>浙江手厅</td>
+                    <td>2016/06/11 20:25:47</td>
+                </tr>
+                <tr>
+                    <td align="left"><label class="my-radio"><input type="radio" name="a"><i></i><span>APP-浙江手厅-开机广告</span></label></td>
+                    <td>开机广告</td>
+                    <td>浙江手厅</td>
+                    <td>2016/06/11 20:25:47</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="handlerBox"><button class="ui-okBtn">确定</button> <button class="ui-cancel closeMe">取消</button></div>
+</div>
+ <!--the popup viewPeriod-->
+ <div class="viewPeriod">
+     <div id="myModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title text-center" style="color: #222;">触点名称XXX排期表</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="viewPeriod">
+                        <div class="leftBar">
+                            <!-- <div class="up">
+                                <em></em><span></span>
+                            </div> -->
+                            <div class="pointUp">
+                                <i class="no"></i>
+                            </div>
+                            <ul class="lbWrap">
+                                <div class="lbInner">
+                                    <ul>
+                                        <li><span>轮播位-浙江手厅</span></li>
+                                        <li><span>轮播位-浙江手厅</span></li>
+                                        <li class="sel">
+                                            <span>启动页-浙江手厅</span>
+                                            <ul class="secondLevel">
+                                                <li><span>触点1</span></li>
+                                                <li><span>触点2</span></li>
+                                                <li><span>触点3</span></li>
+                                                <li><span>触点4</span></li>
+                                                <li><span>触点5</span></li>
+                                                <li><span>触点6</span></li>
+                                                <li><span>触点1</span></li>
+                                                <li><span>触点2</span></li>
+                                                <li><span>触点3</span></li>
+                                                <li><span>触点4</span></li>
+                                                <li><span>触点5</span></li>
+                                                <li><span>触点6</span></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </ul>
+                            <div class="pointDown">
+                                <i></i>
+                            </div>
+                            <!-- <div class="down">
+                                <em></em><span></span>
+                            </div> -->
+                        </div>
+                        <div class="dateWrap">
+                        </div>
+                        <div class="pushArea">
+                            <ul>
+                                <li><i class="endIcon"></i><span>投放结束</span></li>
+                                <li><i class="pushingIcon"></i><span>投放中</span></li>
+                                <li>
+                                    <i class="readyIcon">
+                                        <span class="readtIcon_icon"></span>
+                                        <span class="readtIcon_text">预投放</span>
+                                    </i>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="text-align: center;">
+                    <button type="button" class="btn btn-default">重设标签</button>
+                    <button type="button" class="btn btn-green" data-dismiss="modal">确认</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<div>
+<!---->
+<script src="../../assets/lib/require.js"></script>
+<script src="../../assets/dist/config.js"></script>
+
+<script src="../../assets/lib/jquery-1.11.3.min.js"></script>
+<script>require(['../../assets/js/advertising'])</script>
+<script>
+    setInterval(function(){
+        if($('#label-user1').prop('checked')){
+            $('.modal-label')[0].style.display = 'block';
+        }else{
+            $('.modal-label')[0].style.display = 'none';
+        }
+    },500);
+</script>
+<script>
+require(["react","react-dom","../js/listData","MessageBox","common","bootstrap","daterangepicker"], function(React, ReactDOM,ListData,MessageBox){
+
+    var dateInit = function(){
+        var ctx = "http://192.168.170.16:8415/mock/datePicker/";
+        var pushEnd=[];
+        var pushing=[];
+        var pushReady=[];
+        var _getPushDatePicker = function(data){
+            $.ajax({
+                url: ctx + 'getPushing.json',
+                type: 'post',
+                data: data,
+                async: false,
+                cache: false,
+                success: function(d){
+                    pushEnd = d.pushEnd;
+                    pushing = d.pushing;
+                    pushReady = d.pushReady;
+                }
+            });
+        }
+        _getPushDatePicker();
+        var dataArea2 = $('.font-ze');
+        dataArea2.dateRangePicker({
+            //startDate: new Date(),
+            getValue: function () {
+                if (dataArea2.val())
+                    return dataArea2.val();
+                else
+                    return '';
+            },
+            setValue: function (s, s1) {
+                dataArea2.val(s1);
+            },
+            format: 'YYYY.MM.DD HH:mm:ss',
+            time: {
+                enabled: true
+            },
+            singleMonth: true,
+            showShortcuts: false,
+            showTopbar: false,
+            singleDate: true,
+            container: '.dateWrap',
+            inline:true,
+            alwaysOpen:true,
+            showDateFilter: function(time, date)
+            {
+                var newTime = new Date(time);
+                var year = newTime.getFullYear();
+                var month = newTime.getMonth();
+                var day = newTime.getDay();
+
+                return '<div class="lunarDate">\
+                            <span style="font-weight:bold">'+date+'</span>\
+                            <div style="opacity:0.3;">'+
+                             LunarDate.GetLunarDay(new Date(time).getFullYear(),new Date(time).getMonth()+1,newTime.getDate())+
+                             '</div>\
+                             <span class="cornerTip"></span>\
+                        </div>';
+            },
+            selectForward: true,
+            beforeShowDay: function(t)
+            {
+                var dateFormat = t.Format("yyyy-MM-dd");
+                var valid = t.getFullYear() + '-' + (t.getMonth() + 1) + '-' + t.getDate();  //disable saturday and sunday
+                var _class;
+                for(var i = 0; i < pushEnd.length; i++) {
+                    var _tooltip = valid == pushEnd[i] ? 'sold out' : '';
+                    if(valid == pushEnd[i]){
+                        var _class = 'pushEnd';
+                    }
+                }
+                for(var i = 0; i< pushing.length; i++ ){
+                    if(valid == pushing[i]){
+                        var _class = 'pushing';
+                    }
+                }
+                for(var i = 0; i< pushReady.length; i++ ){
+                    if(valid == pushReady[i]){
+                        var _class = 'pushReady';
+                    }
+                }
+                return [valid,_class];
+            }
+        });
+    };
+    dateInit();
+    addBtns();
+    pointScroll();
+});
+
+    var LunarDate = {
+        madd: new Array(0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334),
+        HsString: '甲乙丙丁戊己庚辛壬癸',
+        EbString: '子丑寅卯辰巳午未申酉戌亥',
+        NumString: "一二三四五六七八九十",
+        MonString: "正二三四五六七八九十冬腊",
+        CalendarData: new Array(
+            0xA4B, 0x5164B, 0x6A5, 0x6D4, 0x415B5, 0x2B6, 0x957, 0x2092F, 0x497,
+            0x60C96, 0xD4A, 0xEA5, 0x50DA9, 0x5AD, 0x2B6, 0x3126E, 0x92E, 0x7192D,
+            0xC95, 0xD4A, 0x61B4A, 0xB55, 0x56A, 0x4155B, 0x25D, 0x92D, 0x2192B,
+            0xA95, 0x71695, 0x6CA, 0xB55, 0x50AB5, 0x4DA, 0xA5B, 0x30A57, 0x52B,
+            0x8152A, 0xE95, 0x6AA, 0x615AA, 0xAB5, 0x4B6, 0x414AE, 0xA57, 0x526,
+            0x31D26, 0xD95, 0x70B55, 0x56A, 0x96D, 0x5095D, 0x4AD, 0xA4D, 0x41A4D,
+            0xD25, 0x81AA5, 0xB54, 0xB6A, 0x612DA, 0x95B, 0x49B, 0x41497, 0xA4B,
+            0xA164B, 0x6A5, 0x6D4, 0x615B4, 0xAB6, 0x957, 0x5092F, 0x497, 0x64B,
+            0x30D4A, 0xEA5, 0x80D65, 0x5AC, 0xAB6, 0x5126D, 0x92E, 0xC96, 0x41A95,
+            0xD4A, 0xDA5, 0x20B55, 0x56A, 0x7155B, 0x25D, 0x92D, 0x5192B, 0xA95,
+            0xB4A, 0x416AA, 0xAD5, 0x90AB5, 0x4BA, 0xA5B, 0x60A57, 0x52B, 0xA93, 0x40E95),
+        Year: null,
+        Month: null,
+        Day: null,
+        TheDate: null,
+        GetBit: function(m, n) {
+            return (m >> n) & 1;
+        },
+        e2c: function() {
+            this.TheDate = (arguments.length != 3) ? new Date() : new Date(arguments[0], arguments[1], arguments[2]);
+            var total, m, n, k;
+            var isEnd = false;
+            var tmp = this.TheDate.getFullYear();
+            total = (tmp - 1921) * 365 + Math.floor((tmp - 1921) / 4) + this.madd[this.TheDate.getMonth()] + this.TheDate.getDate() - 38;
+            if (this.TheDate.getYear() % 4 == 0 && this.TheDate.getMonth() > 1) {
+                total++;
+            }
+            for (m = 0;; m++) {
+                k = (this.CalendarData[m] < 0xfff) ? 11 : 12;
+                for (n = k; n >= 0; n--) {
+                    if (total <= 29 + this.GetBit(this.CalendarData[m], n)) {
+                        isEnd = true;
+                        break;
+                    }
+                    total = total - 29 - this.GetBit(this.CalendarData[m], n);
+                }
+                if (isEnd) break;
+            }
+            this.Year = 1921 + m;
+            this.Month = k - n + 1;
+            this.Day = total;
+            if (k == 12) {
+                if (this.Month == Math.floor(this.CalendarData[m] / 0x10000) + 1) {
+                    this.Month = 1 - this.Month;
+                }
+                if (this.Month > Math.floor(this.CalendarData[m] / 0x10000) + 1) {
+                    this.Month--;
+                }
+            }
+        },
+        GetcDateString: function() {
+            var tmp = "";
+            // tmp += this.HsString.charAt((this.Year - 4) % 10);
+            // tmp += this.EbString.charAt((this.Year - 4) % 12);
+            // tmp += "年 ";
+            // if (this.Month < 1) {
+            //  tmp += "(闰)";
+            //  tmp += this.MonString.charAt(-this.Month - 1);
+            // } else {
+            //  tmp += this.MonString.charAt(this.Month - 1);
+            // }
+            // tmp += "月";
+            tmp += (this.Day < 11) ? "初" : ((this.Day < 20) ? "十" : ((this.Day < 30) ? "廿" : "三十"));
+            if (this.Day % 10 != 0 || this.Day == 10) {
+                tmp += this.NumString.charAt((this.Day - 1) % 10);
+            }
+            return tmp;
+        },
+        GetLunarDay: function(solarYear, solarMonth, solarDay) {
+            if (solarYear < 1921 || solarYear > 2020) {
+                return "";
+            } else {
+                solarMonth = (parseInt(solarMonth) > 0) ? (solarMonth - 1) : 11;
+                this.e2c(solarYear, solarMonth, solarDay);
+                return this.GetcDateString();
+            }
+        }
+    };
+    // window.onload = function() {
+    //  document.write('2016-10-29 ' + LunarDate.GetLunarDay(2016, 10, 29));
+    // };
+
+    function addBtns() {
+        $('.month-wrapper').append($('.pushArea'));
+    }
+    function pointScroll() {
+        var _up     = $('.pointUp i');
+        var _down   = $('.pointDown i');
+        var realH   = $('.lbInner').scrollTop();
+        var fixH    = $('.lbWrap').outerHeight();
+        var innerH  = $('.lbInner').outerHeight();
+        var fixLiH  = $('.lbInner ul li').outerHeight();
+        var len = $('.lbInner ul li').length;
+        var count = 0;
+        _down.on('click', function(){
+            $('.lbInner').stop().animate({
+                marginTop: -(count + 1) * fixLiH
+            },function(){
+                $('.pointUp i').removeClass('no');
+                if(count < len - 9) {
+                    count++;
+                }
+                if(count == len -9) {
+                    $('.pointDown i').addClass('no');
+                }
+            });
+        });
+        _up.on('click', function(){
+            if(count > 0) {
+                count--;
+            }
+            if(count < len -9) {
+                $('.pointDown i').removeClass('no');
+            }
+            $('.lbInner').stop().animate({
+                marginTop: -(count) * fixLiH
+            },function(){
+                if( count == 0) {
+                    $('.pointUp i').addClass('no');
+                }
+            });
+        });
+
+        //----
+        var _span = $('.lbInner ul li span');
+        _span.each(function(){
+            $(this).on('click', function(){
+
+            });
+        });
+
+    }
+</script>
+</body>
+</html>

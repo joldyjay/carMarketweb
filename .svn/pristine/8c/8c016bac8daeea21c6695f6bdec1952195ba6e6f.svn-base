@@ -1,0 +1,223 @@
+require(["react","react-dom","../js/listData","MessageBox","common","bootstrap","daterangepicker"], function(React, ReactDOM,ListData,MessageBox){
+    init();
+    renderTypes();
+    initFormValidate();
+
+    var dateInit = function(){
+        var startEle = $('#startDate'), endEle = $('#endDate');
+        startEle.dateRangePicker({
+            separator: '至',
+            getValue: function () {
+                if (startEle.val() && endEle.val())
+                    return startEle.val() + '至' + endEle.val();
+                else
+                    return '';
+            },
+            setValue: function (s, s1, s2) {
+                startEle.val(s1);
+                endEle.val(s2);
+            }
+        });
+    }
+
+    dateInit();
+
+});
+
+    function displayOtherConditions(show, text) {
+        if(show){
+            $(".condition-select").addClass("hidden");
+            $(".condition-select").eq(0).removeClass("hidden");
+        }else{
+            $(".condition-select").addClass("hidden");
+        }
+    }
+
+    function init(){
+        $(".filter-select li a").on("click", function(){
+            if($(this).text() != "请选择"){
+                displayOtherConditions(true);
+            }else{
+                displayOtherConditions(false);
+            }
+        });
+
+        $(".UPload").change(function(){
+            var filePath = $(this).val();
+            var index = filePath.lastIndexOf("\\");
+            var filename = filePath.substr(index+1);
+            $(this).prev("input").val(filename);
+
+            if(checkFileType($(this))){
+                preview(this);
+            }
+        });
+
+        /**
+         * 检查文件类型
+         * @param ele
+         * @param suffix
+         */
+        function checkFileType(ele, suffix){
+            if(ele.val()){
+                var parts = ele.val().split(/\./);
+                var ext = parts[parts.length - 1];
+                if(ext){
+                    ext = ext.toLowerCase();
+                    var reg = suffix || /(csv|txt)$/;
+                    if(!reg.test(ext)){
+                        var validator = $("#dataForm").validate();
+                        var err4type = validator.errorsFor($("input[name='fileName']")[0]);
+                        if(!err4type.length){
+                            err4type = $('<span id="fileName-error" class="error error-tip">文件格式只支持csv和txt</span>');
+                            $("input[name='fileName']").attr("aria-describedby", "fileName-error");
+                            ele.parents(".form-group").append(err4type);
+                        }
+                        err4type.show().html("文件格式只支持csv和txt");
+                        return false;
+                    }
+
+                    return true;
+                }else{
+                    return false;
+                }
+            }else{
+                return false;
+            }
+        }
+
+        $("#btn-save").on("click", function(){
+            var validator = $("#dataForm").validate();
+            if(validator.form()){
+                if(!checkFileType($(".UPload"))){
+                    return false;
+                }
+                if(checkActivityType(validator)) {
+                    if(checkStrategy(validator)) {
+                        submitFormData();
+                    }
+                }
+            }
+        });
+
+    }
+
+    function renderTypes(){
+        var url = "http://192.168.170.16:8415/mock/marketingweb/getActivityCategory.json";
+        var parent = $(".activityType-select");
+        parent.empty();
+        parent.append('<li data-value=""><a href="#">请选择</a></li>');
+        ajaxData(url, {"src": 10}, function(data){
+            data.forEach(function(item){
+                parent.append('<li data-value="'+item["categoryId"]+'"><a href="#">'+item["categoryName"]+'</a></li>');
+            });
+
+            $("a", parent).on("click", function(){
+                var val = $(this).parent().data("value");
+                var isUserFilter = $("#isUserFilter").val();
+                if(val && isUserFilter == "1") {
+                    $(".condition-select").eq(1).removeClass("hidden");
+                    getStrategies(val);
+                }else{
+                    $(".condition-select").eq(1).addClass("hidden");
+                    var validator = $("#dataForm").validate();
+                    var err4type = validator.errorsFor($("input[name='strategyId']")[0]);
+                    if(err4type.length){
+                        err4type.hide();
+                    }
+                }
+            });
+        });
+    }
+
+    function getStrategies(type){
+        $.ajax({
+            type: 'post',
+            data: JSON.stringify({"categoryId": type}),
+            url: "http://192.168.170.16:8415/mock/marketingweb/getContentByCategory.json",
+            dataType: 'json',
+//            contentType: 'application/json',
+            success: function (list) {
+                var parent = $(".strategy-select");
+                parent.empty();
+                parent.append('<li data-value=""><a href="#"><span class="default empty">&nbsp;</span><span class="text-wrap">请选择</span></a></li>');
+                list.StrategyList.forEach(function(item){
+                    var inner = item["strategyName"];
+                    if(item["isDefault"]){
+                        inner = "<span class='default'>默认</span><span class='text-wrap'>" + inner+"</span>";
+                    }else{
+                        inner = "<span class='default empty'>&nbsp;</span><span class='text-wrap'>" + inner +"</span>";
+                    }
+                    parent.append('<li data-value="'+item["strategyId"]+'"><a href="#">'+inner+'</a></li>');
+                });
+
+                $("a", parent).on("click", function(){
+                    var selectTxt = $(this).children(".text-wrap").text();
+                    $(".btn", parent.parent()).eq(0).html(selectTxt);
+                    $("input", parent.parent()).eq(0).val($(this).parent().data("value"));
+
+                    if($(this).parent().data("value")){
+                        displayEditBtn(true);
+                        var validator = $("#dataForm").validate();
+                        var err4type = validator.errorsFor($("input[name='strategyId']")[0]);
+                        if(err4type.length){
+                            err4type.hide();
+                        }
+                    }else{
+                        displayEditBtn(false);
+                    }
+                });
+            }
+        });
+    }
+
+    function displayEditBtn(display){
+        if(display){
+            $("#edit_btn").removeClass("hidden");
+        }else{
+            $("#edit_btn").addClass("hidden");
+        }
+    }
+
+    function initFormValidate(){
+        $("#dataForm").validate({
+            errorPlacement: function(error, element){
+                error.addClass("error-tip");
+                if(element.next().hasClass("promot")) {
+                    element.after(error);
+                }else{
+                    element.parents(".form-group").append(error);
+                }
+            },
+            rules: {
+                activityName: {
+                    required: true,
+                    noSpecial: true
+                },
+                fileName: {
+                    required: true
+                },
+                smsContent: {
+                    required: true
+                },
+                endTime: {
+                    required: true
+                }
+            },
+            errorElement: "span",
+            messages: {
+                activityName: {
+                    required: "请填写活动名称"
+                },
+                fileName: {
+                    required: "请上传用户群"
+                },
+                smsContent: {
+                    required: "请填写营销内容"
+                },
+                endTime: {
+                    required: "请填写发送时间"
+                }
+            }
+        });
+    }

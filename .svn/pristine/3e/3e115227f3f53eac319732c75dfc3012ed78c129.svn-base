@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>营销平台-汽车行业解决方案</title>
+    <link rel="stylesheet" href="../../assets/css/css.css">
+</head>
+<body>
+<header id="header">
+    <div id="logo" class="pull-left mt-25 ml-25">
+        <a href="javascript:;"><img src="../../assets/imgs/car_picture1.png"></a>
+    </div>
+    <div id="userBox" class="pull-right mr-40 mt-30 clearfix">
+        
+            <span class="userInfo pull-left mt-5">Spencer@cmcc.com</span>
+            <!-- <span id="triangle" class="pull-left ml-10 mt-15"></span> -->
+            <a href="/market/user/logout.action" id="loginOut" class="pull-left ml-10">退出</a>
+    </div>
+</header>
+    <div class="p-t">
+        <span class="no-bg"><a href="">营销平台首页</a></span>
+        <span>
+            产品中心
+            <ul class="subBox" id="goodsSub">
+                <font class="top-icon"></font>
+                <li><a href="">智投</a></li>
+                <li><a href="#">智推</a></li>
+                <li><a href="#">智铃</a></li>
+            </ul>
+        </span>
+        <span>解决方案
+            <ul class="subBox" id="proSub">
+                <font class="top-icon"></font>
+                <li><a href="#">金融行业</a></li>
+                <li><a href="#">汽车行业</a></li>
+            </ul>
+        </span>
+    </div>
+<div id="main">
+<aside id="leftNav">
+    <ul>
+        <li class="market active" data-identity="yxtf">
+            <a>
+                <i class="icon-market"></i>
+                汽车营销
+                <font class="closeFlag"></font>
+            </a>
+        </li>
+        <dl class="subNav" style="display: block;">
+            <dt data-identity="yxgl" class="active"><a href="Custom_marketing.html" target="ifm">自定义营销案</a></dt>
+            <dt data-identity="wlgl"><a href="new_marketing.html" target="ifm">新建营销案</a></dt>
+        </dl>
+        <li class="analysis">
+            <a>
+                <i class="icon-analysis"></i>
+                监控分析
+                <font class="closeFlag"></font>
+            </a>
+        </li>
+        <li class="report">
+            <a>
+                <i class="icon-report"></i>
+                营销报告
+                <font class="closeFlag"></font>
+            </a>
+        </li>
+        <li class="analyze">
+            <a>
+                <i class="icon-analyze"></i>
+                竞品分析
+                <font class="closeFlag"></font>
+            </a>
+        </li>
+        <span class="goHome">
+            <a href="/market/common/adhome.action">&lt; 返回首页</a>
+        </span>
+    </ul>
+</aside>
+<div id="ifmwrap"><iframe frameborder="no" scrolling="no" width="100%" height="1200" name="ifm"></iframe></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0,minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>历史营销统计</title>
+
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/base.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/platform/iconfont.css"/>
+    <link rel="stylesheet" href="../../assets/css/weui_toast.min.css"/>
+    <link rel="stylesheet" href="../../assets/lib/daterangepicker/daterangepicker.css"/>
+
+    <link rel="stylesheet" href="../../assets/theme/default/theme.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/main.min.css"/>
+
+    <!--[if lt IE 9]>
+    <script src="../../assets/lib/html5shiv.js"></script>
+    <script src="../../assets/lib/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+        .form-group label{
+            width: 80px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <div class="module-header mb-20">
+        <h3>行业营销-历史营销统计</h3>
+    </div>
+
+    <div class="tile mt-20">
+        <div class="tile-header">
+            历史活动类型统计
+        </div>
+
+        <div class="tile-content nop">
+            <div id="pie" style="height: 320px;"></div>
+        </div>
+
+        <div class="tile-header">
+            营销活动成功率统计
+        </div>
+
+        <div class="tile-content nop">
+            <div id="hint_chart" style="height: 320px;"></div>
+        </div>
+    </div>
+
+    <div id="messageBox"></div>
+</div>
+
+<!--[if lt IE 9]>
+<script src="../../assets/lib/es5-shim.min.js"></script>
+<script src="../../assets/lib/es5-sham.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 10]>
+<script>
+    Object.getPrototypeOf = function getPrototypeOf(object) {
+        return object.__proto__;
+    };
+</script>
+<![endif]-->
+
+<script>
+    if (window.ActiveXObject) {
+        var reg = /10\.0/;
+        var str = navigator.userAgent;
+        if (reg.test(str)) {
+            Object.getPrototypeOf = function getPrototypeOf(object) {
+                return object.__proto__;
+            };
+        }
+    }
+</script>
+
+
+<script src="../../assets/lib/require.js"></script>
+<script src="../../assets/dist/config.js"></script>
+<script>
+    var ctx = "http://192.168.170.16:8415/mock/marketingweb/";
+
+    require(["echarts","common"], function(echarts){
+        renderPie();
+
+        renderHint_Chart();
+    });
+
+    function renderHint_Chart() {
+        getHintData(function(data){
+            if(data && data.rateList && data.rateList.length){
+                var categories = [];
+                var customersArr = [];
+                var rateArr = [];
+                data.rateList.forEach(function(item){
+                    categories.push(item["activityName"]);
+                    customersArr.push(item["actualCustomers"]);
+                    rateArr.push(item["smsArrivalRate"]);
+                });
+
+                var charts = echarts.init($('#hint_chart')[0]);
+                var option = {
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    title: {
+                        show: true,
+                        text: '营销活动成功率对比',
+                        x: $('#line').width()*0.28,
+                        y: 'bottom',
+                        padding:[0,0,9,0],
+                        textStyle: {
+                            fontSize: 13,
+                            color: "#555",
+                            fontWeight: 'normal'
+                        }
+                    },
+                    toolbox: {
+                        show: false
+                    },
+                    calculable: true,
+                    legend: {
+                        data: ['营销人数', '营销成功率'],
+                        x: 'center',
+                        y: 'bottom',
+                        textStyle: {
+                            color: "#555",
+                            fontFamily: "Microsoft YaHei"
+                        }
+                    },
+                    xAxis: [
+                        {
+                            type: 'category',
+                            data: categories
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            type: 'value',
+                            name: '',
+                            max: data.maxNum,
+                            axisLabel: {
+                                formatter: '{value} '
+                            }
+                        },
+                        {
+                            type: 'value',
+                            name: '',
+                            max: data.maxRate,
+                            axisLabel: {
+                                formatter: '{value} %'
+                            }
+                        }
+                    ],
+                    series: [
+
+                        {
+                            name: '营销人数',
+                            type: 'bar',
+                            barWidth: '20',
+                            data: customersArr
+                        },
+
+                        {
+                            name: '营销成功率',
+                            type: 'line',
+                            yAxisIndex: 1,
+                            data: rateArr
+                        }
+                    ]
+                };
+                charts.setOption(option);
+            }
+        });
+    }
+
+    function renderPie(){
+        getPieData(function(data){
+            var legends = [];
+            var ret = data.map(function(item){
+                legends.push(item["categoryName"]);
+                return {
+                    name: item["categoryName"],
+                    value: item["count"]
+                };
+            });
+            ret.reverse();
+            var pieCharts = echarts.init($('#pie')[0]);
+
+            var option = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                title: {
+                    show: true,
+                    text: '历史活动类型占比',
+                    x: (function(){
+                        return $('#pie').width()*0.8
+                    })(),
+                    y: 70,
+                    textStyle: {
+                        fontSize: 13,
+                        color: "#555",
+                        fontWeight: 'normal'
+                    }
+                },
+                legend: {
+                    orient: 'vertical',
+                    textStyle:{
+                        fontFamily: "Microsoft YaHei"
+                    },
+                    x: '80%',
+                    y: '100px',
+                    data: legends
+                },
+                toolbox: {
+                    show: false
+                },
+                calculable: true,
+                series: [
+                    {
+                        name: '访问来源',
+                        type: 'pie',
+                        radius: ['50%', '70%'],
+                        itemStyle: {
+                            normal: {
+                                label: {
+                                    show: true,
+                                    formatter: " {d}%"
+                                },
+                                labelLine: {
+                                    show: false
+                                }
+                            },
+                            emphasis: {
+                                label: {
+                                    show: true,
+                                    position: 'center',
+                                    textStyle: {
+                                        fontSize: '30',
+                                        fontWeight: 'bold'
+                                    }
+                                }
+                            }
+                        },
+                        data: ret
+                    }
+                ]
+            };
+            pieCharts.setOption(option);
+        });
+    }
+
+    /**
+     * 获取饼图数据
+     * @param callback
+     */
+    function getPieData(callback){
+        $.ajax({
+            url: ctx+'/getCategoryPercent.json',
+            dataType: 'json',
+            success:function(d) {
+                callback(d);
+            }
+        });
+    }
+
+    /**
+     * 营销活动成功率统计数据
+     * @param callback
+     */
+    function getHintData(callback){
+        $.ajax({
+            url: ctx+'/successRate.json',
+            dataType: 'json',
+            success:function(d) {
+                callback(d);
+            }
+        });
+    }
+</script>
+</body>
+</html>

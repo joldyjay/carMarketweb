@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0,minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>自定义营销案</title>
+
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/base.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/platform/iconfont.css"/>
+    <link rel="stylesheet" href="../../assets/css/weui_toast.min.css"/>
+    <link rel="stylesheet" href="../../assets/lib/daterangepicker/daterangepicker.css"/>
+
+    <link rel="stylesheet" href="../../assets/theme/default/theme.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/main.min.css"/>
+
+    <!--[if lt IE 9]>
+    <script src="../../assets/lib/html5shiv.js"></script>
+    <script src="../../assets/lib/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="main-container">
+    <ol class="breadcrumb">
+        <li>营销案管理</li>
+        <li class="active">自定义营销案</li>
+    </ol>
+
+    <h3>
+        自定义营销案
+        <a class="btn btn-sm btn-cyan pull-right" href="new_marketing.html">新建营销案</a>
+    </h3>
+    <div class="tile mt-30" style="overflow: hidden">
+        <div class="form-inline">
+            <div class="form-group form-group-sm">
+                <span>营销案名称:</span>
+                <input name="query1" class="searchItem form-control">
+            </div>
+            <a class="btn btn-sm btn-cyan btn-width ml-20" id="search-btn">搜索</a>
+            <a href="javascript:void(0);" class="btn-sm pull-right" style="color:#77c3fa;font-size: 14px;">案例营销案></a>
+        </div>
+        <div id="table_wrap" class="mt-10 table-wrap text-center"></div>
+    </div>
+</div>
+
+<!--[if lt IE 9]>
+<script src="../../assets/lib/es5-shim.min.js"></script>
+<script src="../../assets/lib/es5-sham.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 10]>
+<script>
+    Object.getPrototypeOf = function getPrototypeOf(object) {
+        return object.__proto__;
+    };
+</script>
+<![endif]-->
+
+<script>
+    if (window.ActiveXObject) {
+        var reg = /10\.0/;
+        var str = navigator.userAgent;
+        if (reg.test(str)) {
+            Object.getPrototypeOf = function getPrototypeOf(object) {
+                return object.__proto__;
+            };
+        }
+    }
+</script>
+
+
+<script src="../../assets/lib/require.js"></script>
+<script src="../../assets/dist/config.js"></script>
+<script>
+    require(["react", "react-dom", "../js/listData", "common", "bootstrap"], function (React, ReactDOM, ListData) {
+        renderTable(React, ReactDOM, ListData);
+    });
+
+    var ctx = "http://192.168.170.16:8415/mock/marketingweb/";
+
+    var rowIndex = 1;
+    var orderFomat = function (value, column, row) {
+        return rowIndex++;
+    };
+
+    var statusFormat = function(value){
+        if(value == "0"){
+            return '<span style="color: #5c5c5c;">保存中</span>';
+        }else if(value == "1"){
+            return '<span style="color: #FC7000;">进行中</span>';
+        }else{
+            return '<span style="color: #B6B6B6;">已经结束</span>';
+        }
+    };
+
+    var renderTable = function (React, ReactDOM, ListData) {
+        var ele = React.createElement(ListData, {
+            action: ctx + "//caseList.html",
+            columns: [
+                {name: "field0", text: "序号", format: orderFomat},
+                {name: "field1", text: "营销案名称"},
+                {name: "field2", text: "投放形式"},
+                {name: "field3", text: "创建时间"},
+                {name: "field4", text: "当前状态", format: statusFormat},
+                {name: "field5", text: "投放次数"},
+                {name: "field6", text: "点击率"},
+                {
+                    name: "op", text: "操作", format: function (value, column, row) {
+                    return ["<a href='particulars.html' class='mr-10 cyan-text'>查看详情</a>"]
+                }
+                }
+            ]
+        });
+        ReactDOM.render(ele, $("#table_wrap")[0]);
+    };
+</script>
+</body>
+</html>

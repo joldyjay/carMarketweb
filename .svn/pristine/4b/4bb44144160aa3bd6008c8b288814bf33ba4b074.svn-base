@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0,minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>用户管理</title>
+
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/base.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/platform/iconfont.css"/>
+    <link rel="stylesheet" href="../../assets/css/weui_toast.min.css"/>
+    <link rel="stylesheet" href="../../assets/lib/daterangepicker/daterangepicker.css"/>
+
+    <link rel="stylesheet" href="../../assets/theme/default/theme.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/main.min.css"/>
+
+    <!--[if lt IE 9]>
+    <script src="../../assets/lib/html5shiv.js"></script>
+    <script src="../../assets/lib/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+        .form-group label{
+            width: 80px;
+            margin-right: 15px;
+            text-align: right;
+        }
+        .promot{
+            padding-left: 100px;
+        }
+        .form-control{
+            width: 200px!important;
+        }
+        .btn-select{
+            width: 175px;
+            border-color: #e1e1e1;
+        }
+        .btn-select-color{
+            border-color: #e1e1e1;
+        }
+        .dropdown-menu{
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <div class="module-header mb-20">
+        <h3>权限管理-用户管理-添加用户</h3>
+    </div>
+
+    <div class="tile mt-20">
+        <div class="tile-content">
+            <form action="" id="dataForm" method="post" class="form">
+                <div class="form-group form-group-sm form-inline">
+                    <label>用户企业</label>
+                    <div class="btn-group btn-group-sm">
+                        <button type="button" class="btn btn-default btn-select">重庆移动</button>
+                        <button type="button" class="btn btn-default dropdown-toggle btn-select-color" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li data-value=""><a href="#">重庆移动</a></li>
+                            <li data-value=""><a href="#">中国银行重庆分公司</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="form-group form-group-sm form-inline">
+                    <label>用户角色</label>
+                    <div class="btn-group btn-group-sm">
+                        <button type="button" class="btn btn-default btn-select">系统管理员</button>
+                        <button type="button" class="btn btn-default dropdown-toggle btn-select-color" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li data-value=""><a href="#">系统管理员</a></li>
+                            <li data-value=""><a href="#">企业客户</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="form-group form-group-sm form-inline">
+                    <label>用户名</label>
+                    <input type="text" maxlength="20" name="roleName" class="form-control" required>
+                    <div class="promot">用户名由汉字、英文字符、数字及下划线组成，长度不超过20个字符</div>
+                </div>
+
+                <div class="form-group form-group-sm form-inline">
+                    <label>密码</label>
+                    <input type="password" name="roleCode" minlength="6" maxlength="16" class="form-control" required>
+                    <div class="promot">密码由英文字符、数字及下划线组成，长度为6~16个字符</div>
+                </div>
+
+                <div class="form-group form-group-sm form-inline">
+                    <label>手机号码</label>
+                    <input type="text" name="roleTel" maxlength="11" class="form-control mobileOnly" required>
+                    <div class="promot">手机号码由数字组成，长度必须为11位</div>
+                </div>
+
+                <div class="form-group form-group-sm form-inline">
+                    <label>邮箱</label>
+                        <input type="text" name="roleEmail" class="form-control" required>
+                    <div class="promot">邮箱地址由英文字符、数字及下划线组成，必须为合法的邮箱地址</div>
+                </div>
+
+                <div class="form-group form-group-sm form-inline mt-40 text-center">
+                    <a class="btn btn-cyan btn-sm btn-width mr-20" id="btn-save">保 存</a>
+                    <a href="javascript:history.go(-1);" class="btn btn-cyan btn-sm btn-width">返回列表</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="messageBox"></div>
+</div>
+
+<!--[if lt IE 9]>
+<script src="../../assets/lib/es5-shim.min.js"></script>
+<script src="../../assets/lib/es5-sham.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 10]>
+<script>
+    Object.getPrototypeOf = function getPrototypeOf(object) {
+        return object.__proto__;
+    };
+</script>
+<![endif]-->
+
+<script>
+    if (window.ActiveXObject) {
+        var reg = /10\.0/;
+        var str = navigator.userAgent;
+        if (reg.test(str)) {
+            Object.getPrototypeOf = function getPrototypeOf(object) {
+                return object.__proto__;
+            };
+        }
+    }
+</script>
+
+
+<script src="../../assets/lib/require.js"></script>
+<script src="../../assets/dist/config.js"></script>
+<script>
+    var messageBox;
+    require(["react","react-dom","MessageBox","common","bootstrap"], function(React, ReactDOM,MessageBox){
+        messageBox = renderWidget(React,ReactDOM,MessageBox, {
+            grid: 0.35,
+            type: "confirm",
+            confirm: function(){
+                showToast();
+                //todo
+                var role_id = messageBox.getData();
+                deleteRole(role_id);
+
+                return true;
+            }
+        }, $("#messageBox")[0]);
+
+        listeners();
+
+        initFormValidate();
+    });
+
+    /**
+     * 监听
+     */
+    function listeners(){
+        $("#btn-save").on("click", function(){
+            if($("#dataForm").validate().form()){
+                $("#dataForm").submit();
+            }
+        });
+    }
+
+    function initFormValidate(){
+        $("#dataForm").validate({
+            errorPlacement: function(error, element){
+                error.addClass("error-tip");
+                element.after(error);
+            },
+            rules: {
+                roleName: {
+                    required: true,
+                    noSpecial: true,
+                    remote: "check.html?roleId=${role.roleId}"
+                },
+                roleCode: {
+                    required: true,
+                    remote: "check.html?roleId=${role.roleId}"
+                },
+                roleTel: {
+                    required: true,
+                    mobile:true,
+                    remote: "check.html?roleId=${role.roleId}"
+                },
+                roleEmail: {
+                    required: true,
+                    email:true,
+                    remote: "check.html?roleId=${role.roleId}"
+                }
+            },
+            errorElement: "span",
+            messages: {
+                roleName: {
+                    required: "请填写用户名",
+                    remote: "用户名已经存在!"
+                },
+                roleCode: {
+                    required: "请填写密码"
+                },
+                roleTel: {
+                    required: "请填写手机号码",
+                    remote: "手机号码已经存在!"
+                },
+                roleEmail: {
+                    required: "请填写邮箱",
+                    remote: "邮箱已经存在!"
+                }
+            }
+        });
+    }
+
+</script>
+</body>
+</html>

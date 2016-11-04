@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0,minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>企业管理</title>
+
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/base.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/platform/iconfont.css"/>
+    <link rel="stylesheet" href="../../assets/css/weui_toast.min.css"/>
+    <link rel="stylesheet" href="../../assets/lib/daterangepicker/daterangepicker.css"/>
+
+    <link rel="stylesheet" href="../../assets/theme/default/theme.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/main.min.css"/>
+
+    <!--[if lt IE 9]>
+    <script src="../../assets/lib/html5shiv.js"></script>
+    <script src="../../assets/lib/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+        .form-group label{
+            width: 95px;
+            margin-right: 15px;
+            text-align: right;
+        }
+        .promot{
+            padding-left: 115px;
+        }
+        .form-control{
+            width: 200px!important;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <div class="module-header mb-20">
+        <h3>企业管理-添加企业</h3>
+    </div>
+
+    <div class="tile mt-20">
+        <div class="tile-content">
+            <form action="" id="dataForm" method="post" class="form">
+                <div class="form-group form-group-sm form-inline">
+                    <label>企业名称</label>
+                    <input type="text" maxlength="16" name="roleName" class="form-control" required>
+                    <div class="promot">企业名称由汉字、英文字符、数字及下划线组成，长度不超过16个字符</div>
+                </div>
+
+                <div class="form-group form-group-sm form-inline">
+                    <label>企业代码</label>
+                    <input type="text" name="roleCode" maxlength="18" class="form-control mobileOnly" required>
+                    <div class="promot">企业代码由数字组成，长度不超过18个字符</div>
+                </div>
+
+                <div class="form-group form-group-sm form-inline">
+                    <label>企业联系电话</label>
+                    <input type="text" name="roleTel" maxlength="20" class="form-control mobileOnly" required>
+                    <div class="promot">企业联系电话由数字组成，长度不超过20个字符</div>
+                </div>
+
+                <div class="form-group form-group-sm form-inline">
+                    <label>企业联系人</label>
+                    <input type="text" maxlength="20" name="roleContact" class="form-control" required>
+                    <div class="promot">企业联系人由汉字、英文字符、数字及下划线组成，长度不超过20个字符</div>
+                </div>
+
+                <div class="form-group form-group-sm form-inline">
+                    <label>企业联系邮箱</label>
+                    <input type="text" maxlength="64" name="roleEmail" class="form-control" required>
+                    <div class="promot">企业联系邮箱由英文字符、数字及下划线组成，长度不超过64个字符</div>
+                </div>
+
+                <div class="form-group form-group-sm form-inline mt-40 text-center">
+                    <a class="btn btn-cyan btn-sm btn-width mr-20" id="btn-save">保 存</a>
+                    <a href="javascript:history.go(-1);" class="btn btn-cyan btn-sm btn-width">返回列表</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="messageBox"></div>
+</div>
+
+<!--[if lt IE 9]>
+<script src="../../assets/lib/es5-shim.min.js"></script>
+<script src="../../assets/lib/es5-sham.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 10]>
+<script>
+    Object.getPrototypeOf = function getPrototypeOf(object) {
+        return object.__proto__;
+    };
+</script>
+<![endif]-->
+
+<script>
+    if (window.ActiveXObject) {
+        var reg = /10\.0/;
+        var str = navigator.userAgent;
+        if (reg.test(str)) {
+            Object.getPrototypeOf = function getPrototypeOf(object) {
+                return object.__proto__;
+            };
+        }
+    }
+</script>
+
+
+<script src="../../assets/lib/require.js"></script>
+<script src="../../assets/dist/config.js"></script>
+<script>
+    var messageBox;
+    require(["react","react-dom","MessageBox","common","bootstrap"], function(React, ReactDOM,MessageBox){
+        messageBox = renderWidget(React,ReactDOM,MessageBox, {
+            grid: 0.35,
+            type: "confirm",
+            confirm: function(){
+                showToast();
+                //todo
+                var role_id = messageBox.getData();
+                deleteRole(role_id);
+
+                return true;
+            }
+        }, $("#messageBox")[0]);
+
+        listeners();
+
+        initFormValidate();
+    });
+
+    /**
+     * 监听
+     */
+    function listeners(){
+        $("#btn-save").on("click", function(){
+            if($("#dataForm").validate().form()){
+                $("#dataForm").submit();
+            }
+        });
+    }
+
+    function initFormValidate(){
+        $("#dataForm").validate({
+            errorPlacement: function(error, element){
+                error.addClass("error-tip");
+                element.after(error);
+            },
+            rules: {
+                roleName: {
+                    required: true,
+                    noSpecial: true,
+                    remote: "check.html?roleId=${role.roleId}"
+                },
+                roleCode: {
+                    required: true,
+                    remote: "check.html?roleId=${role.roleId}"
+                },
+                roleTel: {
+                    required: true,
+                    remote: "check.html?roleId=${role.roleId}"
+                },
+                roleContact: {
+                    required: true,
+                    noSpecial: true,
+                    remote: "check.html?roleId=${role.roleId}"
+                },
+                roleEmail: {
+                    required: true,
+                    email: true,
+                    remote: "check.html?roleId=${role.roleId}"
+                }
+            },
+            errorElement: "span",
+            messages: {
+                roleName: {
+                    required: "请填写企业名称",
+                    remote: "企业名称已经存在!"
+                },
+                roleCode: {
+                    required: "请填写企业代码",
+                    remote: "企业代码已经存在!"
+                },
+                roleTel: {
+                    required: "请填写企业联系电话",
+                    remote: "企业联系电话已经存在!"
+                },
+                roleContact: {
+                    required: "请填写企业联系人",
+                    remote: "企业联系人已经存在!"
+                },
+                roleEmail: {
+                    required: "请填写企业联系邮箱",
+                    remote: "企业联系邮箱已经存在!"
+                }
+            }
+        });
+    }
+
+</script>
+</body>
+</html>

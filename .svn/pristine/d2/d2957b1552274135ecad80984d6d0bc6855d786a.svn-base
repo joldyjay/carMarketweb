@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0,minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>用户管理</title>
+    <link rel="stylesheet" href="../../assets/css/css.css">
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/base.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/platform/iconfont.css"/>
+    <link rel="stylesheet" href="../../assets/css/weui_toast.min.css"/>
+    <link rel="stylesheet" href="../../assets/lib/daterangepicker/daterangepicker.css"/>
+
+    <link rel="stylesheet" href="../../assets/theme/default/theme.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/main.min.css"/>
+
+    <!--[if lt IE 9]>
+    <script src="../../assets/lib/html5shiv.js"></script>
+    <script src="../../assets/lib/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+        .form-group label{
+            width: 80px;
+        }
+        #rightCon {
+            float: left;
+            width:1000px;
+            padding: 20px 40px 30px;
+        }
+    </style>
+</head>
+<body style="background-color:#f5f7f7;">
+<div id="rightCon">
+        <ol class="site">
+            <li>营销案管理</li>
+            <li>自定义营销案</li>
+        </ol>
+        <h3>自定义营销案<span id="addNewPlanCaseId" class="btn-green pull-right"><a href="new_marketing.html">新增营销案</a></span></h3>
+    <div id="content" class="clearfix">
+    <div class="mt-20">
+        <div class="form-inline">
+        <div class="form-group form-group-sm">
+                <span>营销案名称:</span>
+                <input name="query1" class="searchItem form-control">
+            </div>
+            <a class="btn btn-sm btn-cyan btn-width ml-20" id="search-btn">搜索</a>
+            <a href="javascript:;" class="btn-sm pull-right" style="color:#77c3fa;font-size: 14px;">案例营销案></a>
+        </div>
+        <div id="table_wrap" class="mt-10 table-wrap text-center"></div>
+    </div>
+</div>
+    <div id="messageBox"></div>
+</div>
+
+<!--[if lt IE 9]>
+<script src="../../assets/lib/es5-shim.min.js"></script>
+<script src="../../assets/lib/es5-sham.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 10]>
+<script>
+    Object.getPrototypeOf = function getPrototypeOf(object) {
+        return object.__proto__;
+    };
+</script>
+<![endif]-->
+
+<script>
+    if (window.ActiveXObject) {
+        var reg = /10\.0/;
+        var str = navigator.userAgent;
+        if (reg.test(str)) {
+            Object.getPrototypeOf = function getPrototypeOf(object) {
+                return object.__proto__;
+            };
+        }
+    }
+</script>
+
+
+<script src="../../assets/lib/require.js"></script>
+<script src="../../assets/dist/config.js"></script>
+<script>
+    var messageBox;
+    require(["react","react-dom","../js/listData","MessageBox","common","bootstrap","daterangepicker"], function(React, ReactDOM,ListData,MessageBox){
+        renderTable(React, ReactDOM,ListData);
+        messageBox = renderWidget(React,ReactDOM,MessageBox, {
+            grid: 0.35,
+            type: "confirm",
+            confirm: function(){
+                showToast();
+                //todo
+                var role_id = messageBox.getData();
+                deleteRole(role_id);
+
+                return true;
+            }
+        }, $("#messageBox")[0]);
+
+        listeners();
+    });
+
+    var ctx = "http://192.168.170.16:8415/mock/prov/";
+
+    var renderTable = function (React, ReactDOM, ListData) {
+        var ele = React.createElement(ListData, {
+            action: ctx + "/history_orders.html",
+            columns: [
+                {name: "ord_no", text: "序号"},
+                {name: "ord_tel", text: "营销案名称"},
+                {name: "ord_email", text: "投放形式"},
+                {name: "ord_id", text: "创建时间"},
+                {name: "ord_corp", text: "当前状态"},
+                {name: "ord_time", text: "投放次数", format: "DateTimeFormat"},
+                {name: "ord_amount", text: "点击率", format: "DateTimeFormat"},
+                {name: "op", text: "操作", format: function (value, column, row) {
+                    return ["<a href='particulars.html' class='mr-10'>查看详情</a>",
+                        ]
+                }}
+            ]
+        });
+        ReactDOM.render(ele, $("#table_wrap")[0]);
+    };
+
+    /**
+     * 监听
+     */
+    function listeners(){
+        $("#table_wrap").on("click", ".btn-delete", function(){
+            //弹框提示
+            messageBox.show('<div class="modal-body text-center">'+
+                    '<div class="">确认删除该用户?</div>'+
+                    '</div>');
+            messageBox.setData($(this).data("id"));
+        });
+    }
+
+    /**
+     * 删除角色
+     * @param role_id
+     */
+    function deleteRole(role_id){
+        //逻辑完成后
+        hideToast();
+    }
+</script>
+</body>
+</html>
